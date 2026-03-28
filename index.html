@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="वाणी AI Pro — 24/7 AI Customer Service Agent for Indian Businesses">
+<title>वाणी AI Pro</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0A0A0A;--surface:#111111;--surface2:#1A1A1A;--surface3:#222222;
+--border:#2A2A2A;--text:#F5F5F5;--text2:#A0A0A0;--text3:#666666;
+--primary:#FF6B00;--primary-dim:#FF6B0033;--primary-light:#FF8C3A;
+--success:#22C55E;--danger:#EF4444;--warning:#F59E0B;
+--saffron:#FF9933;--white-i:#FFFFFF;--green-i:#138808;
+--radius:12px;--radius-sm:8px;--radius-xs:6px;
+--font:'Plus Jakarta Sans','Noto Sans Devanagari',sans-serif;
+--shadow:0 4px 24px rgba(0,0,0,0.4);
+}
+html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+font-family:var(--font);background:var(--bg);color:var(--text);
+min-height:100vh;min-height:100dvh;overflow-y:auto;
+display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;
+}
+input,textarea,select,button{font-family:var(--font);font-size:14px}
+input,textarea,select{
+background:var(--surface2);border:1px solid var(--border);color:var(--text);
+border-radius:var(--radius-sm);padding:10px 12px;width:100%;outline:none;
+transition:border-color .2s;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--primary)}
+textarea{resize:vertical;min-height:70px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23A0A0A0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+button{cursor:pointer;border:none;outline:none;-webkit-tap-highlight-color:transparent}
+a{color:var(--primary);text-decoration:none}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+
+/* APP SHELL */
+#app{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;max-width:480px;margin:0 auto;width:100%;position:relative}
+.header{
+background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);
+padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
+border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;
+}
+.header-left{display:flex;align-items:center;gap:10px}
+.logo-mark{
+width:36px;height:36px;border-radius:10px;
+background:linear-gradient(135deg,var(--saffron),var(--primary));
+display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;
+}
+.header-title{font-size:16px;font-weight:700;line-height:1.2}
+.header-subtitle{font-size:10px;color:var(--text2);font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+.header-badge{
+font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;
+background:linear-gradient(135deg,var(--success),#16A34A);color:#fff;letter-spacing:.5px;
+}
+.tab-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.tab-panel{display:none;padding:0}
+.tab-panel.active{display:block}
+
+/* BOTTOM NAV */
+.bottom-nav{
+position:sticky;bottom:0;z-index:100;
+background:var(--surface);border-top:1px solid var(--border);
+display:flex;padding:6px 0;padding-bottom:max(6px,env(safe-area-inset-bottom));
+}
+.nav-btn{
+flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+padding:6px 4px;background:none;color:var(--text3);font-size:10px;font-weight:500;
+transition:color .2s;position:relative;
+}
+.nav-btn.active{color:var(--primary)}
+.nav-btn svg{width:20px;height:20px}
+.nav-btn .badge{
+position:absolute;top:2px;right:calc(50% - 18px);
+background:var(--danger);color:#fff;font-size:8px;font-weight:700;
+min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+padding:0 4px;
+}
+.nav-btn .badge:empty{display:none}
+
+/* AGENT TAB */
+.agent-container{display:flex;flex-direction:column;height:calc(100vh - 110px);height:calc(100dvh - 110px)}
+.agent-topbar{
+padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+background:var(--surface);border-bottom:1px solid var(--border);
+}
+.agent-topbar select{width:auto;padding:6px 28px 6px 8px;font-size:12px;border-radius:var(--radius-xs)}
+.session-timer{
+font-size:11px;color:var(--primary);font-weight:600;
+font-variant-numeric:tabular-nums;margin-left:auto;
+}
+.mute-btn{
+width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:14px;
+}
+.mute-btn.muted{color:var(--danger);border-color:var(--danger)}
+.chat-area{
+flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;
+-webkit-overflow-scrolling:touch;
+}
+.msg{
+max-width:85%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.5;
+animation:msgIn .3s ease;word-wrap:break-word;
+}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{
+background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;
+align-self:flex-end;border-bottom-right-radius:4px;
+}
+.msg.ai{
+background:var(--surface2);color:var(--text);
+align-self:flex-start;border-bottom-left-radius:4px;border:1px solid var(--border);
+}
+.msg.system{
+align-self:center;background:var(--primary-dim);color:var(--primary);
+font-size:12px;padding:6px 14px;border-radius:20px;
+}
+.typing-indicator{
+align-self:flex-start;background:var(--surface2);border:1px solid var(--border);
+padding:12px 18px;border-radius:16px;border-bottom-left-radius:4px;display:none;
+}
+.typing-indicator.show{display:flex;gap:4px;align-items:center}
+.typing-dot{
+width:7px;height:7px;border-radius:50%;background:var(--text3);
+animation:typingBounce 1.4s infinite ease-in-out;
+}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* WAVEFORM */
+.waveform{display:none;align-items:center;justify-content:center;gap:3px;padding:8px 0}
+.waveform.active{display:flex}
+.wave-bar{
+width:3px;border-radius:3px;background:var(--primary);
+animation:waveAnim 1s ease-in-out infinite;
+}
+.wave-bar:nth-child(1){height:12px;animation-delay:0s}
+.wave-bar:nth-child(2){height:20px;animation-delay:.1s}
+.wave-bar:nth-child(3){height:16px;animation-delay:.2s}
+.wave-bar:nth-child(4){height:24px;animation-delay:.3s}
+.wave-bar:nth-child(5){height:14px;animation-delay:.4s}
+.wave-bar:nth-child(6){height:20px;animation-delay:.5s}
+.wave-bar:nth-child(7){height:10px;animation-delay:.6s}
+@keyframes waveAnim{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+
+/* QUICK CHIPS */
+.chips-row{
+display:flex;gap:6px;padding:8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+scrollbar-width:none;
+}
+.chips-row::-webkit-scrollbar{display:none}
+.chip{
+flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;
+background:var(--surface2);border:1px solid var(--border);color:var(--text2);
+white-space:nowrap;transition:all .2s;
+}
+.chip:active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* INPUT BAR */
+.input-bar{
+padding:8px 12px;background:var(--surface);border-top:1px solid var(--border);
+display:flex;gap:8px;align-items:flex-end;
+}
+.input-bar textarea{
+min-height:40px;max-height:100px;padding:10px 12px;border-radius:20px;font-size:14px;
+resize:none;line-height:1.4;
+}
+.input-bar .icon-btn{
+width:40px;height:40px;min-width:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+font-size:18px;transition:all .2s;
+}
+.send-btn{background:var(--primary);color:#fff}
+.send-btn:disabled{opacity:.4}
+.mic-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.mic-btn.recording{background:var(--danger);color:#fff;border-color:var(--danger);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 10px rgba(239,68,68,0)}}
+
+/* ACTION BUTTONS BAR */
+.action-bar{
+position:sticky;bottom:0;z-index:50;
+padding:8px 12px;background:var(--surface);border-top:1px solid var(--border);
+display:flex;gap:8px;flex-wrap:wrap;
+}
+.action-btn{
+flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;
+padding:10px 12px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;
+transition:all .2s;
+}
+<div class="form-group">
+  abel class="form-label">Business Logo/Photo <span style="font-size:10px;color:var(--text3)">(Optional)</span></label>
+  <input type="file" id="s_logo" accept="image/*" style="padding:6px;font-size:13px" onchange="uploadLogo(this)">
+  <div id="logoPreview" style="margin-top:8px;max-width:120px;height:120px;border-radius:12px;overflow:hidden;border:2px solid var(--border);display:none">
+    <img id="logoImg" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <p style="font-size:10px;color:var(--text3);margin-top:4px">Square image recommended. Max 2MB.</p>
+</div>
+
+.action-btn:active{transform:scale(.96)}
+.btn-call{background:#22C55E;color:#fff}
+.btn-wa{background:#25D366;color:#fff}
+.btn-schedule{background:var(--surface2);border:1px solid var(--border);color:var(--text)}
+.btn-session{background:var(--primary);color:#fff}
+.btn-end{background:var(--surface2);border:1px solid var(--danger);color:var(--danger)}
+
+/* SETUP TAB */
+.setup-container{padding:16px 12px;padding-bottom:100px}
+.setup-section{margin-bottom:20px}
+.section-title{
+font-size:13px;font-weight:700;color:var(--primary);text-transform:uppercase;
+letter-spacing:1px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);
+}
+.form-group{margin-bottom:12px}
+.form-label{display:block;font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.form-label .req{color:var(--danger)}
+.form-row{display:flex;gap:8px}
+.form-row>*{flex:1}
+.toggle-row{
+display:flex;align-items:center;justify-content:space-between;
+padding:10px 0;border-bottom:1px solid var(--border);
+}
+.toggle-row label{font-size:14px;color:var(--text)}
+.toggle{
+width:44px;height:24px;border-radius:12px;background:var(--surface3);
+position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;
+}
+.toggle.on{background:var(--primary)}
+.toggle::after{
+content:'';position:absolute;width:20px;height:20px;border-radius:50%;
+background:#fff;top:2px;left:2px;transition:transform .2s;
+}
+.toggle.on::after{transform:translateX(20px)}
+
+/* SERVICE ITEMS */
+.svc-list{display:flex;flex-direction:column;gap:8px}
+.svc-card{
+background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);
+padding:10px 12px;display:flex;justify-content:space-between;align-items:center;
+}
+.svc-info h4{font-size:14px;font-weight:600}
+.svc-info p{font-size:12px;color:var(--text2)}
+.svc-price{font-size:14px;font-weight:700;color:var(--primary)}
+.svc-del{
+width:28px;height:28px;border-radius:50%;background:var(--danger);color:#fff;
+display:flex;align-items:center;justify-content:center;font-size:14px;margin-left:8px;
+}
+.add-svc-form{
+background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
+padding:12px;display:flex;flex-direction:column;gap:8px;margin-top:8px;
+}
+.btn-primary{
+width:100%;padding:12px;border-radius:var(--radius-sm);
+background:linear-gradient(135deg,var(--primary),var(--primary-light));
+color:#fff;font-size:15px;font-weight:700;text-align:center;
+transition:all .2s;
+}
+.btn-primary:active{transform:scale(.98);opacity:.9}
+.btn-secondary{
+width:100%;padding:10px;border-radius:var(--radius-sm);
+background:var(--surface2);border:1px solid var(--border);
+color:var(--text);font-size:14px;font-weight:600;text-align:center;
+}
+
+/* LEADS TAB */
+.leads-container{padding:12px;padding-bottom:100px}
+.leads-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.leads-header h2{font-size:18px;font-weight:700}
+.leads-filter{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.filter-chip{
+padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;
+background:var(--surface2);border:1px solid var(--border);color:var(--text2);
+}
+.filter-chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.lead-card{
+background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
+padding:12px;margin-bottom:8px;
+}
+.lead-card .lead-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.lead-card .lead-name{font-size:15px;font-weight:600}
+.lead-card .lead-time{font-size:11px;color:var(--text3)}
+.lead-card .lead-query{font-size:13px;color:var(--text2);margin-bottom:8px}
+.lead-card .lead-priority{
+display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;
+text-transform:uppercase;letter-spacing:.5px;
+}
+.lead-card .lead-priority.hot{background:#EF444433;color:#EF4444}
+.lead-card .lead-priority.warm{background:#F59E0B33;color:#F59E0B}
+.lead-card .lead-priority.cold{background:#3B82F633;color:#3B82F6}
+.lead-actions{display:flex;gap:6px;margin-top:8px}
+.lead-actions button{
+flex:1;padding:8px;border-radius:var(--radius-xs);font-size:12px;font-weight:600;
+display:flex;align-items:center;justify-content:center;gap:4px;
+}
+.lead-status-badge{
+font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;
+background:var(--surface3);color:var(--text2);
+}
+
+/* ANALYTICS TAB */
+.analytics-container{padding:12px;padding-bottom:100px}
+.analytics-container h2{font-size:18px;font-weight:700;margin-bottom:12px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.stat-card{
+background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
+padding:14px;text-align:center;
+}
+.stat-card .stat-value{font-size:24px;font-weight:800;color:var(--primary)}
+.stat-card .stat-label{font-size:11px;color:var(--text2);margin-top:2px}
+.chart-section{margin-bottom:16px}
+.chart-title{font-size:14px;font-weight:600;margin-bottom:8px}
+.bar-chart{display:flex;flex-direction:column;gap:6px}
+.bar-row{display:flex;align-items:center;gap:8px}
+.bar-label{width:40px;font-size:11px;color:var(--text2);text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:24px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.bar-fill{
+height:100%;border-radius:4px;
+background:linear-gradient(90deg,var(--primary),var(--primary-light));
+transition:width .6s ease;display:flex;align-items:center;padding-left:6px;
+font-size:10px;font-weight:600;color:#fff;
+}
+.topics-list{display:flex;flex-direction:column;gap:4px}
+.topic-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.topic-name{font-size:13px}
+.topic-count{font-size:13px;font-weight:700;color:var(--primary)}
+
+/* TOAST */
+.toast{
+position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);
+background:var(--success);color:#fff;padding:10px 20px;border-radius:var(--radius);
+font-size:14px;font-weight:600;z-index:9999;transition:transform .3s ease;
+box-shadow:var(--shadow);
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.error{background:var(--danger)}
+
+/* SCHEDULE MODAL */
+.modal-overlay{
+position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;
+align-items:flex-end;justify-content:center;
+}
+.modal-overlay.show{display:flex}
+.modal-sheet{
+background:var(--surface);border-radius:16px 16px 0 0;padding:20px 16px;
+width:100%;max-width:480px;max-height:80vh;overflow-y:auto;
+padding-bottom:max(20px,env(safe-area-inset-bottom));
+}
+.modal-handle{width:40px;height:4px;border-radius:2px;background:var(--border);margin:0 auto 16px}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:12px}
+
+/* ONBOARDING OVERLAY */
+.onboard-overlay{
+position:fixed;inset:0;background:var(--bg);z-index:300;
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+padding:24px;text-align:center;
+}
+.onboard-overlay.hidden{display:none}
+.onboard-logo{font-size:48px;margin-bottom:16px}
+.onboard-title{font-size:28px;font-weight:800;margin-bottom:8px}
+.onboard-sub{font-size:14px;color:var(--text2);margin-bottom:24px;max-width:300px}
+.india-stripe{
+width:60px;height:4px;border-radius:2px;margin:0 auto 24px;
+background:linear-gradient(90deg,var(--saffron) 33%,var(--white-i) 33% 66%,var(--green-i) 66%);
+}
+.onboard-btn{
+padding:14px 40px;border-radius:var(--radius);
+background:linear-gradient(135deg,var(--primary),var(--primary-light));
+color:#fff;font-size:16px;font-weight:700;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-mark">व</div>
+      <div>
+        <div class="header-title" id="headerTitle">वाणी AI Pro</div>
+        <div class="header-subtitle" id="headerSub">AI Customer Agent</div>
+      </div>
+    </div>
+    <span class="header-badge">LIVE</span>
+  </header>
+
+  <!-- TAB CONTENT -->
+  <div class="tab-content">
+    <!-- AGENT TAB -->
+    <div class="tab-panel active" id="tabAgent">
+      <div class="agent-container">
+        <div class="agent-topbar">
+          <select id="langSelect" title="Language">
+            <option value="hinglish">Hinglish</option>
+            <option value="hindi">Hindi</option>
+            <option value="english">English</option>
+            <option value="rajasthani">Rajasthani</option>
+          </select>
+          <button class="mute-btn" id="muteBtn" title="Mute Speaker">🔊</button>
+          <span class="session-timer" id="sessionTimer">00:00</span>
+        </div>
+
+        <div class="chat-area" id="chatArea">
+          <div class="msg system">Welcome! Tap "Start Session" to begin.</div>
+        </div>
+
+        <div class="waveform" id="waveform">
+          <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+          <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+        </div>
+
+        <div class="chips-row" id="chipsRow"></div>
+
+        <div class="input-bar" id="inputBar">
+          <textarea id="chatInput" rows="1" placeholder="Type your message..." disabled></textarea>
+          <button class="icon-btn mic-btn" id="micBtn" title="Voice Input" disabled>🎤</button>
+          <button class="icon-btn send-btn" id="sendBtn" title="Send" disabled>➤</button>
+        </div>
+
+        <div class="action-bar" id="actionBar">
+          <button class="action-btn btn-session" id="startBtn" onclick="startSession()">▶ Start Session</button>
+          <button class="action-btn btn-end" id="endBtn" onclick="endSession()" style="display:none">■ End</button>
+          <button class="action-btn btn-call" id="callBtn" style="display:none" onclick="makeCall()">📞 Call</button>
+          <button class="action-btn btn-wa" id="waBtn" style="display:none" onclick="openWhatsApp()">💬 WhatsApp</button>
+          <button class="action-btn btn-schedule" id="schedBtn" style="display:none" onclick="showSchedule()">📅 Schedule</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETUP TAB -->
+    <div class="tab-panel" id="tabSetup">
+      <div class="setup-container">
+        <!-- BUSINESS IDENTITY -->
+        <div class="setup-section">
+          <div class="section-title">🏢 Business Identity</div>
+          <div class="form-group"><label class="form-label">Business Name <span class="req">*</span></label><input id="s_bizName" placeholder="e.g. Sharma Medical Store"></div>
+          <div class="form-group"><label class="form-label">Owner Name <span class="req">*</span></label><input id="s_owner" placeholder="e.g. Ashish Sharma"></div>
+          <div class="form-group">
+            <label class="form-label">Business Type <span class="req">*</span></label>
+            <select id="s_bizType">
+              <option value="">Select Type</option>
+              <option value="kirana">Kirana / General Store</option>
+              <option value="medical">Medical / Pharmacy</option>
+              <option value="clinic">Clinic / Doctor</option>
+              <option value="hospital">Hospital</option>
+              <option value="coaching">Coaching / Tuition Center</option>
+              <option value="ca_firm">CA / Tax Consultant</option>
+              <option value="lawyer">Lawyer / Advocate</option>
+              <option value="hotel">Hotel / Restaurant</option>
+              <option value="salon">Salon / Beauty Parlor</option>
+              <option value="gym">Gym / Fitness Center</option>
+              <option value="realEstate">Real Estate / Property</option>
+              <option value="auto">Auto / Garage</option>
+              <option value="electronics">Electronics / Mobile Shop</option>
+              <option value="clothing">Clothing / Fashion</option>
+              <option value="jewellery">Jewellery</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Tagline / Slogan</label><input id="s_tagline" placeholder="e.g. Aapki Sehat, Hamari Zimmedari"></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">GST Number</label><input id="s_gst" placeholder="Optional"></div>
+            <div class="form-group"><label class="form-label">MSME/Udyam</label><input id="s_msme" placeholder="Optional"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Registration Type</label>
+            <select id="s_regType">
+              <option value="proprietorship">Proprietorship</option>
+              <option value="partnership">Partnership</option>
+              <option value="pvtltd">Pvt Ltd</option>
+              <option value="llp">LLP</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="setup-section">
+          <div class="section-title">📱 Contact Details</div>
+          <div class="form-group"><label class="form-label">Primary Mobile <span class="req">*</span></label><input id="s_mobile" type="tel" placeholder="e.g. 9251022710"></div>
+          <div class="form-group"><label class="form-label">Secondary Mobile</label><input id="s_mobile2" type="tel" placeholder="Optional"></div>
+          <div class="form-group"><label class="form-label">Email</label><input id="s_email" type="email" placeholder="Optional"></div>
+          <div class="form-group"><label class="form-label">Website</label><input id="s_website" placeholder="Optional"></div>
+          <div class="form-group"><label class="form-label">Full Address</label><textarea id="s_address" placeholder="Shop number, street, area..."></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">City / Area</label><input id="s_city" placeholder="e.g. Jaipur"></div>
+            <div class="form-group"><label class="form-label">Google Maps Link</label><input id="s_maps" placeholder="Optional"></div>
+          </div>
+        </div>
+
+        <!-- WORKING HOURS -->
+        <div class="setup-section">
+          <div class="section-title">🕐 Working Hours</div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Mon–Fri From</label><input id="s_wdFrom" type="time" value="09:00"></div>
+            <div class="form-group"><label class="form-label">Mon–Fri To</label><input id="s_wdTo" type="time" value="18:00"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Saturday From</label><input id="s_satFrom" type="time" value="09:00"></div>
+            <div class="form-group"><label class="form-label">Saturday To</label><input id="s_satTo" type="time" value="14:00"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Sunday From</label><input id="s_sunFrom" type="time"></div>
+            <div class="form-group"><label class="form-label">Sunday To</label><input id="s_sunTo" type="time"></div>
+          </div>
+          <div class="toggle-row"><label>Sunday Closed</label><div class="toggle" id="t_sunClosed" onclick="toggleSwitch(this)"></div></div>
+          <div class="toggle-row"><label>Holiday Closed</label><div class="toggle on" id="t_holClosed" onclick="toggleSwitch(this)"></div></div>
+          <div class="toggle-row"><label>Emergency 24/7 Available</label><div class="toggle" id="t_emergency" onclick="toggleSwitch(this)"></div></div>
+          <div class="form-row" style="margin-top:8px">
+            <div class="form-group"><label class="form-label">Lunch Break From</label><input id="s_lunchFrom" type="time"></div>
+            <div class="form-group"><label class="form-label">Lunch Break To</label><input id="s_lunchTo" type="time"></div>
+          </div>
+        </div>
+
+        <!-- APPOINTMENT -->
+        <div class="setup-section">
+          <div class="section-title">📅 Appointment Booking</div>
+          <div class="toggle-row"><label>Enable Appointments</label><div class="toggle" id="t_appt" onclick="toggleSwitch(this)"></div></div>
+          <div id="apptFields" style="display:none;margin-top:8px">
+            <div class="form-group">
+              <label class="form-label">Slot Duration</label>
+              <select id="s_slotDur"><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">60 min</option></select>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Max Slots/Day</label><input id="s_maxSlots" type="number" value="10"></div>
+              <div class="form-group"><label class="form-label">Advance Days</label><input id="s_advDays" type="number" value="7"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Buffer Between (min)</label><input id="s_buffer" type="number" value="5"></div>
+          </div>
+        </div>
+
+        <!-- DELIVERY -->
+        <div class="setup-section">
+          <div class="section-title">🚚 Delivery</div>
+          <div class="toggle-row"><label>Home Delivery Available</label><div class="toggle" id="t_delivery" onclick="toggleSwitch(this)"></div></div>
+          <div id="deliveryFields" style="display:none;margin-top:8px">
+            <div class="form-group"><label class="form-label">Delivery Radius (km)</label><input id="s_delRadius" type="number" placeholder="e.g. 5"></div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Min Order ₹</label><input id="s_minOrder" type="number" placeholder="e.g. 200"></div>
+              <div class="form-group"><label class="form-label">Delivery Charge ₹</label><input id="s_delCharge" type="number" placeholder="e.g. 30"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Free Delivery Above ₹</label><input id="s_freeAbove" type="number" placeholder="e.g. 500"></div>
+          </div>
+        </div>
+
+        <!-- SERVICES -->
+        <div class="setup-section">
+          <div class="section-title">🛒 Services & Products</div>
+          <div class="svc-list" id="svcList"></div>
+          <div class="add-svc-form" id="addSvcForm">
+            <input id="svc_name" placeholder="Service / Product Name">
+            <div class="form-row">
+              <input id="svc_price" type="number" placeholder="Price ₹">
+              <input id="svc_duration" placeholder="Duration / Unit (optional)">
+            </div>
+            <input id="svc_desc" placeholder="Brief description (optional)">
+            <button class="btn-secondary" onclick="addService()">+ Add Service</button>
+          </div>
+        </div>
+
+        <!-- AI PERSONALITY -->
+        <div class="setup-section">
+          <div class="section-title">🤖 AI Personality</div>
+          <div class="form-group">
+            <label class="form-label">AI Tone</label>
+            <select id="s_tone">
+              <option value="friendly">Friendly — Warm & Helpful</option>
+              <option value="professional">Professional — Formal & Courteous</option>
+              <option value="desi">Desi — Local & Casual</option>
+              <option value="rajasthani">Rajasthani Warm — Traditional & Respectful</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Default Language</label>
+            <select id="s_defLang">
+              <option value="hinglish">Hinglish (Hindi+English)</option>
+              <option value="hindi">Hindi</option>
+              <option value="english">English</option>
+              <option value="rajasthani">Rajasthani</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">AI Display Name</label><input id="s_aiName" placeholder="e.g. Vaani, Rani, Assistant"></div>
+          <div class="form-group"><label class="form-label">Special Instructions for AI</label><textarea id="s_instructions" placeholder="e.g. Always recommend our premium plan first..."></textarea></div>
+          <div class="form-group"><label class="form-label">About Your Business</label><textarea id="s_about" placeholder="Tell AI about your business story, USP, specialties..."></textarea></div>
+          <div class="form-group"><label class="form-label">Competitor Instructions</label><textarea id="s_competitor" placeholder="What should AI NOT discuss? e.g. Never mention XYZ pharmacy..."></textarea></div>
+        </div>
+
+        <button class="btn-primary" onclick="saveSetup()" style="margin-top:8px">💾 Save Setup & Go Live</button>
+      </div>
+    </div>
+
+    <!-- LEADS TAB -->
+    <div class="tab-panel" id="tabLeads">
+      <div class="leads-container">
+        <div class="leads-header">
+          <h2>Leads</h2>
+          <div style="display:flex;gap:6px">
+            <button class="btn-secondary" style="width:auto;padding:6px 12px;font-size:12px" onclick="showAddLead()">+ Add</button>
+            <button class="btn-secondary" style="width:auto;padding:6px 12px;font-size:12px" onclick="exportLeads()">↗ Export</button>
+          </div>
+        </div>
+        <div class="leads-filter" id="leadsFilter">
+          <button class="filter-chip active" onclick="filterLeads('all',this)">All</button>
+          <button class="filter-chip" onclick="filterLeads('hot',this)">🔥 Hot</button>
+          <button class="filter-chip" onclick="filterLeads('warm',this)">🌤 Warm</button>
+          <button class="filter-chip" onclick="filterLeads('cold',this)">❄ Cold</button>
+        </div>
+        <div id="leadsListEl"></div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS TAB -->
+    <div class="tab-panel" id="tabAnalytics">
+      <div class="analytics-container">
+        <h2>Analytics</h2>
+        <div style="display:flex;gap:6px;margin:8px 0 12px">
+          <button class="filter-chip active" id="analyPeriodW" onclick="setAnalyticsPeriod('week',this)">This Week</button>
+          <button class="filter-chip" id="analyPeriodM" onclick="setAnalyticsPeriod('month',this)">This Month</button>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-value" id="statConvos">0</div><div class="stat-label">Conversations</div></div>
+          <div class="stat-card"><div class="stat-value" id="statMessages">0</div><div class="stat-label">Messages</div></div>
+          <div class="stat-card"><div class="stat-value" id="statAvgTime">0m</div><div class="stat-label">Avg Duration</div></div>
+          <div class="stat-card"><div class="stat-value" id="statLeads">0</div><div class="stat-label">Leads Captured</div></div>
+        </div>
+        <div class="chart-section">
+          <div class="chart-title">Peak Hours</div>
+          <div class="bar-chart" id="peakChart"></div>
+        </div>
+        <div class="chart-section">
+          <div class="chart-title">Top Query Topics</div>
+          <div class="topics-list" id="topicsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" onclick="switchTab('Agent',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Agent
+    </button>
+    <button class="nav-btn" onclick="switchTab('Setup',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Setup
+    </button>
+    <button class="nav-btn" onclick="switchTab('Leads',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Leads
+      <span class="badge" id="leadsBadge"></span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('Analytics',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Analytics
+    </button>
+  </nav>
+</div>
+
+<!-- SCHEDULE MODAL -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">📅 Schedule a Callback</div>
+    <div class="form-group"><label class="form-label">Your Name <span class="req">*</span></label><input id="sch_name" placeholder="Enter your name"></div>
+    <div class="form-group"><label class="form-label">Mobile Number <span class="req">*</span></label><input id="sch_mobile" type="tel" placeholder="Enter mobile number"></div>
+    <div class="form-group">
+      <label class="form-label">Preferred Time</label>
+      <select id="sch_time">
+        <option>Morning (9 AM - 12 PM)</option>
+        <option>Afternoon (12 PM - 3 PM)</option>
+        <option>Evening (3 PM - 6 PM)</option>
+        <option>Any Time</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Brief Query</label><input id="sch_query" placeholder="What do you need help with?"></div>
+    <button class="btn-primary" onclick="submitSchedule()" style="margin-top:8px">Submit Request</button>
+    <button class="btn-secondary" onclick="hideSchedule()" style="margin-top:8px">Cancel</button>
+  </div>
+</div>
+
+<!-- ADD LEAD MODAL -->
+<div class="modal-overlay" id="addLeadModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">+ Add Lead Manually</div>
+    <div class="form-group"><label class="form-label">Name <span class="req">*</span></label><input id="al_name" placeholder="Lead name"></div>
+    <div class="form-group"><label class="form-label">Mobile <span class="req">*</span></label><input id="al_mobile" type="tel" placeholder="Mobile number"></div>
+    <div class="form-group"><label class="form-label">Query / Need</label><input id="al_query" placeholder="What are they looking for?"></div>
+    <div class="form-group">
+      <label class="form-label">Priority</label>
+      <select id="al_priority"><option value="hot">🔥 Hot</option><option value="warm" selected>🌤 Warm</option><option value="cold">❄ Cold</option></select>
+    </div>
+    <button class="btn-primary" onclick="submitAddLead()" style="margin-top:8px">Save Lead</button>
+    <button class="btn-secondary" onclick="hideAddLead()" style="margin-top:8px">Cancel</button>
+  </div>
+</div>
+
+<!-- ONBOARDING -->
+<div class="onboard-overlay" id="onboarding">
+  <div class="onboard-logo">🎯</div>
+  <h1 class="onboard-title">वाणी AI Pro</h1>
+  <div class="india-stripe"></div>
+  <p class="onboard-sub">24/7 AI Customer Service Agent for your business. Koi staff nahi, koi salary nahi, kabhi band nahi!</p>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:20px">By The Consulting Crew, Jaipur</p>
+  <button class="onboard-btn" onclick="dismissOnboarding()">Get Started →</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// =========== STATE ===========
+let sessionActive = false;
+let sessionStart = null;
+let timerInterval = null;
+let conversationHistory = [];
+let isSpeaking = false;
+let isMuted = false;
+let recognition = null;
+let currentFilter = 'all';
+let analyticsPeriod = 'week';
+
+// =========== INIT ===========
+document.addEventListener('DOMContentLoaded', () => {
+  loadSetup();
+  renderServices();
+  renderLeads();
+  renderAnalytics();
+  updateLeadsBadge();
+  checkOnboarding();
+  initSpeechRecognition();
+  setupAutoResize();
+  initToggleStates();
+});
+
+function checkOnboarding() {
+  const biz = getSetup();
+  if (biz.bizName && biz.mobile) {
+    document.getElementById('onboarding').classList.add('hidden');
+    updateHeaderBiz();
+  }
+}
+
+function dismissOnboarding() {
+  document.getElementById('onboarding').classList.add('hidden');
+  switchTab('Setup', document.querySelectorAll('.nav-btn')[1]);
+}
+
+// =========== TAB NAVIGATION ===========
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'Analytics') renderAnalytics();
+  if (name === 'Leads') renderLeads();
+}
+
+// =========== SETUP ===========
+const SETUP_FIELDS = [
+  's_bizName','s_owner','s_bizType','s_tagline','s_gst','s_msme','s_regType',
+  's_mobile','s_mobile2','s_email','s_website','s_address','s_city','s_maps',
+  's_wdFrom','s_wdTo','s_satFrom','s_satTo','s_sunFrom','s_sunTo',
+  's_lunchFrom','s_lunchTo',
+  's_slotDur','s_maxSlots','s_advDays','s_buffer',
+  's_delRadius','s_minOrder','s_delCharge','s_freeAbove',
+  's_tone','s_defLang','s_aiName','s_instructions','s_about','s_competitor'
+];
+const TOGGLE_FIELDS = ['t_sunClosed','t_holClosed','t_emergency','t_appt','t_delivery'];
+
+function getSetup() {
+  const d = {};
+  SETUP_FIELDS.forEach(id => { const el = document.getElementById(id); if(el) d[id.slice(2)] = el.value; });
+  TOGGLE_FIELDS.forEach(id => { const el = document.getElementById(id); if(el) d[id.slice(2)] = el.classList.contains('on'); });
+  d.services = JSON.parse(localStorage.getItem('vaani_services') || '[]');
+  return d;
+}
+
+function saveSetup() {
+  const biz = getSetup();
+  if (!biz.bizName || !biz.mobile) {
+    showToast('Business Name and Mobile are required!', true);
+    return;
+  }
+  SETUP_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) localStorage.setItem('vaani_' + id, el.value);
+  });
+  TOGGLE_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) localStorage.setItem('vaani_' + id, el.classList.contains('on') ? '1' : '0');
+  });
+  updateHeaderBiz();
+  showToast('Setup saved! Your AI agent is ready.');
+  setTimeout(() => switchTab('Agent', document.querySelectorAll('.nav-btn')[0]), 800);
+}
+
+function loadSetup() {
+  SETUP_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    const val = localStorage.getItem('vaani_' + id);
+    if (el && val !== null) el.value = val;
+  });
+  TOGGLE_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    const val = localStorage.getItem('vaani_' + id);
+    if (el && val !== null) {
+      el.classList.toggle('on', val === '1');
+    }
+  });
+  const defLang = localStorage.getItem('vaani_s_defLang');
+  if (defLang) document.getElementById('langSelect').value = defLang;
+}
+
+function initToggleStates() {
+  const apptToggle = document.getElementById('t_appt');
+  const delToggle = document.getElementById('t_delivery');
+  document.getElementById('apptFields').style.display = apptToggle.classList.contains('on') ? 'block' : 'none';
+  document.getElementById('deliveryFields').style.display = delToggle.classList.contains('on') ? 'block' : 'none';
+}
+
+function toggleSwitch(el) {
+  el.classList.toggle('on');
+  if (el.id === 't_appt') document.getElementById('apptFields').style.display = el.classList.contains('on') ? 'block' : 'none';
+  if (el.id === 't_delivery') document.getElementById('deliveryFields').style.display = el.classList.contains('on') ? 'block' : 'none';
+}
+
+function updateHeaderBiz() {
+  const name = localStorage.getItem('vaani_s_bizName');
+  const aiName = localStorage.getItem('vaani_s_aiName');
+  if (name) {
+    document.getElementById('headerTitle').textContent = aiName || 'वाणी AI';
+    document.getElementById('headerSub').textContent = name;
+  }
+}
+
+// =========== SERVICES ===========
+function addService() {
+  const name = document.getElementById('svc_name').value.trim();
+  const price = document.getElementById('svc_price').value.trim();
+  const duration = document.getElementById('svc_duration').value.trim();
+  const desc = document.getElementById('svc_desc').value.trim();
+  if (!name) { showToast('Service name is required', true); return; }
+  const services = JSON.parse(localStorage.getItem('vaani_services') || '[]');
+  services.push({ name, price, duration, desc, id: Date.now() });
+  localStorage.setItem('vaani_services', JSON.stringify(services));
+  ['svc_name','svc_price','svc_duration','svc_desc'].forEach(id => document.getElementById(id).value = '');
+  renderServices();
+  showToast('Service added!');
+}
+
+function deleteService(id) {
+  let services = JSON.parse(localStorage.getItem('vaani_services') || '[]');
+  services = services.filter(s => s.id !== id);
+  localStorage.setItem('vaani_services', JSON.stringify(services));
+  renderServices();
+}
+
+function renderServices() {
+  const services = JSON.parse(localStorage.getItem('vaani_services') || '[]');
+  const el = document.getElementById('svcList');
+  if (!services.length) { el.innerHTML = '<p style="color:var(--text3);font-size:13px;text-align:center;padding:12px">No services added yet.</p>'; return; }
+  el.innerHTML = services.map(s => `
+    <div class="svc-card">
+      <div class="svc-info">
+        <h4>${esc(s.name)}</h4>
+        <p>${s.duration ? esc(s.duration) + ' · ' : ''}${s.desc ? esc(s.desc) : ''}</p>
+      </div>
+      ${s.price ? `<span class="svc-price">₹${esc(s.price)}</span>` : ''}
+      <button class="svc-del" onclick="deleteService(${s.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+// =========== CHAT / AGENT ===========
+function startSession() {
+  const biz = getSetup();
+  if (!biz.bizName || !biz.mobile) {
+    showToast('Please complete Setup first!', true);
+    switchTab('Setup', document.querySelectorAll('.nav-btn')[1]);
+    return;
+  }
+  sessionActive = true;
+  sessionStart = Date.now();
+  conversationHistory = [];
+  document.getElementById('chatArea').innerHTML = '';
+  addSystemMsg('Session started. How can I help you today?');
+
+  document.getElementById('startBtn').style.display = 'none';
+  document.getElementById('endBtn').style.display = '';
+  document.getElementById('callBtn').style.display = '';
+  document.getElementById('waBtn').style.display = '';
+  document.getElementById('schedBtn').style.display = '';
+  document.getElementById('chatInput').disabled = false;
+  document.getElementById('micBtn').disabled = false;
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('chatInput').focus();
+
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+  buildChips();
+
+  // Log session for analytics
+  const sessions = JSON.parse(localStorage.getItem('vaani_sessions') || '[]');
+  sessions.push({ start: sessionStart, messages: 0, topics: [] });
+  localStorage.setItem('vaani_sessions', JSON.stringify(sessions));
+}
+
+function endSession() {
+  sessionActive = false;
+  clearInterval(timerInterval);
+
+  // Update last session
+  const sessions = JSON.parse(localStorage.getItem('vaani_sessions') || '[]');
+  if (sessions.length > 0) {
+    const last = sessions[sessions.length - 1];
+    last.end = Date.now();
+    last.duration = Date.now() - (last.start || sessionStart);
+    last.messages = conversationHistory.length;
+    localStorage.setItem('vaani_sessions', JSON.stringify(sessions));
+  }
+
+  // Auto-capture lead if 4+ messages
+  if (conversationHistory.length >= 4) {
+    autoCaptureLead();
+  }
+
+  addSystemMsg('Session ended. Thank you!');
+  document.getElementById('startBtn').style.display = '';
+  document.getElementById('endBtn').style.display = 'none';
+  document.getElementById('callBtn').style.display = 'none';
+  document.getElementById('waBtn').style.display = 'none';
+  document.getElementById('schedBtn').style.display = 'none';
+  document.getElementById('chatInput').disabled = true;
+  document.getElementById('micBtn').disabled = true;
+  document.getElementById('sendBtn').disabled = true;
+  document.getElementById('sessionTimer').textContent = '00:00';
+  conversationHistory = [];
+}
+
+function updateTimer() {
+  if (!sessionStart) return;
+  const diff = Math.floor((Date.now() - sessionStart) / 1000);
+  const m = String(Math.floor(diff / 60)).padStart(2, '0');
+  const s = String(diff % 60).padStart(2, '0');
+  document.getElementById('sessionTimer').textContent = m + ':' + s;
+}
+
+function addMsg(text, type) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + type;
+  div.textContent = text;
+  document.getElementById('chatArea').appendChild(div);
+  scrollChat();
+}
+
+function addSystemMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'msg system';
+  div.textContent = text;
+  document.getElementById('chatArea').appendChild(div);
+  scrollChat();
+}
+
+function scrollChat() {
+  const area = document.getElementById('chatArea');
+  requestAnimationFrame(() => area.scrollTop = area.scrollHeight);
+}
+
+function showTyping(show) {
+  document.getElementById('typingIndicator').classList.toggle('show', show);
+  if (show) scrollChat();
+}
+
+async function sendMessage(text) {
+  if (!text || !text.trim() || !sessionActive) return;
+  text = text.trim();
+  addMsg(text, 'user');
+  conversationHistory.push({ role: 'user', content: text });
+  document.getElementById('chatInput').value = '';
+  autoResizeTextarea();
+
+  showTyping(true);
+
+  try {
+    const biz = getSetup();
+    const systemPrompt = buildSystemPrompt(biz);
+
+    const payload = {
+      model: 'claude-sonnet-4-6',
+      max_tokens: 700,
+      system: systemPrompt,
+      messages: conversationHistory.slice(-14)
+    };
+
+    let data;
+    try {
+      // Try server proxy first (keeps API key secure)
+      const resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!resp.ok) throw new Error('Proxy error ' + resp.status);
+      data = await resp.json();
+      if (data.error) throw new Error(data.error);
+    } catch (proxyErr) {
+      // Fallback to direct API call
+      console.log('Proxy failed, using direct API:', proxyErr.message);
+      const resp2 = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': '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',
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!resp2.ok) {
+        const errData = await resp2.json().catch(() => ({}));
+        throw new Error(errData.error?.message || `API error ${resp2.status}`);
+      }
+      data = await resp2.json();
+    }
+
+    showTyping(false);
+    const aiText = data.content?.[0]?.text || 'Sorry, I could not process your request.';
+    addMsg(aiText, 'ai');
+    conversationHistory.push({ role: 'assistant', content: aiText });
+
+    // Update session message count
+    const sessions = JSON.parse(localStorage.getItem('vaani_sessions') || '[]');
+    if (sessions.length > 0) {
+      sessions[sessions.length - 1].messages = conversationHistory.length;
+      // Auto-tag topics
+      tagTopics(aiText, sessions[sessions.length - 1]);
+      localStorage.setItem('vaani_sessions', JSON.stringify(sessions));
+    }
+
+    // Speak response
+    if (!isMuted) speakText(aiText);
+
+  } catch (err) {
+    showTyping(false);
+    addMsg('Error: ' + err.message, 'ai');
+    console.error('Chat error:', err);
+  }
+}
+
+function buildSystemPrompt(biz) {
+  const langMap = {
+    hinglish: 'Natural Hinglish — Hindi aur English freely mix karo jaise educated Indians bolte hain. Roman script use karo.',
+    hindi: 'Sirf shuddh Hindi mein. Roman script bilkul nahi.',
+    english: 'Clear professional English. Simple words, no jargon.',
+    rajasthani: 'Rajasthani-Hindi mix — "sa", "ji", "m\'haro", "aap" use karo. Warm traditional language.'
+  };
+  const toneMap = {
+    friendly: 'Warm aur friendly — jaise helpful dost.',
+    professional: 'Professional aur courteous.',
+    desi: 'Bilkul local desi — "bhai", "yaar", "ji" naturally.',
+    rajasthani: 'Rajasthani warmth with traditional respect.'
+  };
+
+  const lang = document.getElementById('langSelect').value || biz.defLang || 'hinglish';
+  const tone = biz.tone || 'friendly';
+  const services = biz.services || [];
+
+  const svcList = services.length > 0
+    ? services.map(s => `• ${s.name}${s.price ? ' — ₹' + s.price : ''}${s.duration ? ' (' + s.duration + ')' : ''}${s.desc ? ' — ' + s.desc : ''}`).join('\n')
+    : 'Services ke baare mein owner se poochho.';
+
+  const hours = [
+    biz.wdFrom && biz.wdTo && `Mon-Fri: ${biz.wdFrom} to ${biz.wdTo}`,
+    biz.satFrom && biz.satTo && `Saturday: ${biz.satFrom} to ${biz.satTo}`,
+    !biz.sunClosed && biz.sunFrom && biz.sunTo && `Sunday: ${biz.sunFrom} to ${biz.sunTo}`,
+    biz.sunClosed && 'Sunday: Closed',
+    biz.lunchFrom && biz.lunchTo && `Lunch break: ${biz.lunchFrom} to ${biz.lunchTo}`
+  ].filter(Boolean).join(' | ');
+
+  const features = [
+    biz.emergency && 'Emergency 24/7 available',
+    biz.appt && 'Appointment booking available',
+    biz.delivery && `Home delivery available (${biz.delRadius ? biz.delRadius + 'km radius' : ''}${biz.minOrder ? ', min ₹' + biz.minOrder : ''}${biz.delCharge ? ', delivery ₹' + biz.delCharge : ''}${biz.freeAbove ? ', free above ₹' + biz.freeAbove : ''})`
+  ].filter(Boolean).join(', ');
+
+  const bizTypeLabels = {
+    kirana:'Kirana/General Store',medical:'Medical/Pharmacy',clinic:'Clinic/Doctor',hospital:'Hospital',
+    coaching:'Coaching/Tuition Center',ca_firm:'CA/Tax Consultant',lawyer:'Lawyer/Advocate',
+    hotel:'Hotel/Restaurant',salon:'Salon/Beauty Parlor',gym:'Gym/Fitness Center',
+    realEstate:'Real Estate/Property',auto:'Auto/Garage',electronics:'Electronics/Mobile Shop',
+    clothing:'Clothing/Fashion',jewellery:'Jewellery',other:'Business'
+  };
+
+  return `You are the AI assistant for "${biz.bizName || 'this business'}", a ${bizTypeLabels[biz.bizType] || 'business'} in ${biz.city || 'India'}.
+${biz.tagline ? 'Tagline: "' + biz.tagline + '"' : ''}
+${biz.aiName ? 'Your name is ' + biz.aiName + '.' : ''}
+
+BUSINESS INFO:
+• Owner: ${biz.owner || 'N/A'}
+• Mobile: ${biz.mobile || 'N/A'} | Email: ${biz.email || 'N/A'}
+• Address: ${biz.address || biz.city || 'N/A'}
+• Hours: ${hours || 'Call for hours'}
+• Features: ${features || 'Standard service'}
+${biz.about ? '\nABOUT:\n' + biz.about : ''}
+
+SERVICES & PRICING:
+${svcList}
+
+LANGUAGE: ${langMap[lang] || langMap.hinglish}
+TONE: ${toneMap[tone] || toneMap.friendly}
+${biz.instructions ? '\nSPECIAL INSTRUCTIONS:\n' + biz.instructions : ''}
+${biz.competitor ? '\nNEVER DISCUSS:\n' + biz.competitor : ''}
+
+RULES:
+1. Give COMPLETE answers — never cut off mid-sentence.
+2. Give EXACT prices from the services list. If not listed, say "please call for pricing."
+3. Always end with a next step or question to keep the conversation going.
+4. If customer wants to talk to owner or book — tell them to use the Call or WhatsApp button, or schedule a callback.
+5. Be helpful, knowledgeable, and represent the business professionally.
+6. Keep answers concise but complete — max 3-4 paragraphs.
+7. If you don't know something specific, say "Main owner se confirm karke batata/batati hoon" rather than guessing.`;
+}
+
+// =========== QUICK CHIPS ===========
+function buildChips() {
+  const biz = getSetup();
+  const typeChips = {
+    medical: ['Medicine available?','Delivery karte ho?','Timing kya hai?','Emergency service?'],
+    clinic: ['Appointment lena hai','Fees kitni hai?','Kaunse doctor hain?','Timing kya hai?'],
+    hotel: ['Menu dikhao','Delivery karte ho?','Table book karna hai','Today\'s special?'],
+    salon: ['Services & prices?','Appointment lena hai','Nearest branch?','Offers kya hain?'],
+    kirana: ['Home delivery?','Kya kya milta hai?','Timing kya hai?','Bulk order?'],
+    ca_firm: ['ITR file karna hai','GST registration','Company registration','Fees kitni hai?'],
+    lawyer: ['Consultation chahiye','Fees kitni hai?','Kaunse cases lete ho?','Timing kya hai?'],
+    coaching: ['Courses kya hain?','Fees kitni hai?','Demo class?','Admission open?'],
+    gym: ['Membership plans?','Timing kya hai?','Personal trainer?','Trial class?'],
+    default: ['Services kya hain?','Prices batao','Timing kya hai?','Location kya hai?']
+  };
+  const chips = typeChips[biz.bizType] || typeChips.default;
+  const row = document.getElementById('chipsRow');
+  row.innerHTML = chips.map(c => `<button class="chip" onclick="sendMessage('${c}')">${c}</button>`).join('');
+}
+
+// =========== VOICE ===========
+function initSpeechRecognition() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    document.getElementById('micBtn').style.display = 'none';
+    return;
+  }
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  const langCodes = { hinglish: 'hi-IN', hindi: 'hi-IN', english: 'en-IN', rajasthani: 'hi-IN' };
+
+  recognition.onstart = () => {
+    document.getElementById('micBtn').classList.add('recording');
+  };
+
+  recognition.onresult = (e) => {
+    const text = e.results[0][0].transcript;
+    document.getElementById('chatInput').value = text;
+    sendMessage(text);
+  };
+
+  recognition.onerror = (e) => {
+    document.getElementById('micBtn').classList.remove('recording');
+    if (e.error !== 'no-speech') showToast('Voice error: ' + e.error, true);
+  };
+
+  recognition.onend = () => {
+    document.getElementById('micBtn').classList.remove('recording');
+  };
+
+  document.getElementById('micBtn').addEventListener('click', () => {
+    if (!sessionActive) return;
+    const lang = document.getElementById('langSelect').value;
+    recognition.lang = langCodes[lang] || 'hi-IN';
+    try { recognition.start(); } catch(e) {}
+  });
+}
+
+function speakText(text) {
+  if (isMuted || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  const lang = document.getElementById('langSelect').value;
+  utterance.lang = (lang === 'english') ? 'en-IN' : 'hi-IN';
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+
+  utterance.onstart = () => {
+    isSpeaking = true;
+    document.getElementById('waveform').classList.add('active');
+  };
+  utterance.onend = () => {
+    isSpeaking = false;
+    document.getElementById('waveform').classList.remove('active');
+  };
+  utterance.onerror = () => {
+    isSpeaking = false;
+    document.getElementById('waveform').classList.remove('active');
+  };
+  window.speechSynthesis.speak(utterance);
+}
+
+document.getElementById('muteBtn').addEventListener('click', () => {
+  isMuted = !isMuted;
+  const btn = document.getElementById('muteBtn');
+  btn.textContent = isMuted ? '🔇' : '🔊';
+  btn.classList.toggle('muted', isMuted);
+  if (isMuted) {
+    window.speechSynthesis?.cancel();
+    document.getElementById('waveform').classList.remove('active');
+  }
+});
+
+// =========== SEND ===========
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const input = document.getElementById('chatInput');
+  sendMessage(input.value);
+});
+
+document.getElementById('chatInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage(e.target.value);
+  }
+});
+
+function setupAutoResize() {
+  const ta = document.getElementById('chatInput');
+  ta.addEventListener('input', autoResizeTextarea);
+}
+
+function autoResizeTextarea() {
+  const ta = document.getElementById('chatInput');
+  ta.style.height = 'auto';
+  ta.style.height = Math.min(ta.scrollHeight, 100) + 'px';
+}
+
+// =========== CALL / WHATSAPP ===========
+function makeCall() {
+  const mobile = localStorage.getItem('vaani_s_mobile');
+  if (mobile) window.location.href = 'tel:+91' + mobile.replace(/\D/g, '');
+  else showToast('No mobile number set in Setup', true);
+}
+
+function openWhatsApp() {
+  const mobile = localStorage.getItem('vaani_s_mobile');
+  const bizName = localStorage.getItem('vaani_s_bizName') || '';
+  if (!mobile) { showToast('No mobile number set in Setup', true); return; }
+  const lastUserMsg = conversationHistory.filter(m => m.role === 'user').pop();
+  const summary = lastUserMsg ? lastUserMsg.content : 'I have a query';
+  const text = encodeURIComponent(`Hi ${bizName}, ${summary}`);
+  window.open(`https://wa.me/91${mobile.replace(/\D/g, '')}?text=${text}`, '_blank');
+}
+
+function showSchedule() { document.getElementById('scheduleModal').classList.add('show'); }
+function hideSchedule() { document.getElementById('scheduleModal').classList.remove('show'); }
+
+function submitSchedule() {
+  const name = document.getElementById('sch_name').value.trim();
+  const mobile = document.getElementById('sch_mobile').value.trim();
+  const time = document.getElementById('sch_time').value;
+  const query = document.getElementById('sch_query').value.trim();
+  if (!name || !mobile) { showToast('Name and mobile required!', true); return; }
+
+  // Save as lead
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  leads.unshift({
+    id: Date.now(), name, mobile, query: `Callback ${time}: ${query}`,
+    priority: 'hot', status: 'new', date: new Date().toISOString(), source: 'schedule'
+  });
+  localStorage.setItem('vaani_leads', JSON.stringify(leads));
+  updateLeadsBadge();
+
+  hideSchedule();
+  ['sch_name','sch_mobile','sch_query'].forEach(id => document.getElementById(id).value = '');
+  showToast('Callback request submitted! Owner will contact you.');
+  addSystemMsg('Callback request saved for ' + name + '.');
+}
+
+// =========== LEADS ===========
+function autoCaptureLead() {
+  const userMsgs = conversationHistory.filter(m => m.role === 'user');
+  if (userMsgs.length < 2) return;
+  const query = userMsgs.map(m => m.content).join(' | ').slice(0, 200);
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  leads.unshift({
+    id: Date.now(), name: 'Chat Lead', mobile: '', query,
+    priority: 'warm', status: 'new', date: new Date().toISOString(), source: 'auto'
+  });
+  localStorage.setItem('vaani_leads', JSON.stringify(leads));
+  updateLeadsBadge();
+}
+
+function showAddLead() { document.getElementById('addLeadModal').classList.add('show'); }
+function hideAddLead() { document.getElementById('addLeadModal').classList.remove('show'); }
+
+function submitAddLead() {
+  const name = document.getElementById('al_name').value.trim();
+  const mobile = document.getElementById('al_mobile').value.trim();
+  const query = document.getElementById('al_query').value.trim();
+  const priority = document.getElementById('al_priority').value;
+  if (!name || !mobile) { showToast('Name and mobile required!', true); return; }
+
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  leads.unshift({
+    id: Date.now(), name, mobile, query, priority, status: 'new',
+    date: new Date().toISOString(), source: 'manual'
+  });
+  localStorage.setItem('vaani_leads', JSON.stringify(leads));
+  hideAddLead();
+  ['al_name','al_mobile','al_query'].forEach(id => document.getElementById(id).value = '');
+  renderLeads();
+  updateLeadsBadge();
+  showToast('Lead added!');
+}
+
+function renderLeads() {
+  let leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  if (currentFilter !== 'all') leads = leads.filter(l => l.priority === currentFilter);
+
+  const el = document.getElementById('leadsListEl');
+  if (!leads.length) {
+    el.innerHTML = '<p style="color:var(--text3);text-align:center;padding:40px 0;font-size:14px">No leads yet. Start a session to auto-capture leads!</p>';
+    return;
+  }
+
+  el.innerHTML = leads.map(l => `
+    <div class="lead-card">
+      <div class="lead-top">
+        <div>
+          <div class="lead-name">${esc(l.name)}</div>
+          ${l.mobile ? `<div style="font-size:12px;color:var(--text2)">${esc(l.mobile)}</div>` : ''}
+        </div>
+        <div style="text-align:right">
+          <span class="lead-priority ${l.priority}">${l.priority.toUpperCase()}</span>
+          <div class="lead-time">${timeAgo(l.date)}</div>
+        </div>
+      </div>
+      ${l.query ? `<div class="lead-query">${esc(l.query)}</div>` : ''}
+      <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+        <span class="lead-status-badge">${l.status || 'new'}</span>
+        <span style="font-size:10px;color:var(--text3)">${l.source || ''}</span>
+      </div>
+      <div class="lead-actions">
+        ${l.mobile ? `<button class="btn-call" style="color:#fff" onclick="window.location.href='tel:+91${l.mobile.replace(/\\D/g,'')}'">📞 Call</button>` : ''}
+        ${l.mobile ? `<button class="btn-wa" style="color:#fff" onclick="window.open('https://wa.me/91${l.mobile.replace(/\\D/g,'')}','_blank')">💬 WA</button>` : ''}
+        <button class="btn-secondary" style="width:auto;font-size:11px" onclick="updateLeadStatus(${l.id})">${l.status === 'contacted' ? '✓ Done' : 'Mark Contacted'}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterLeads(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('#leadsFilter .filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderLeads();
+}
+
+function updateLeadStatus(id) {
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  const lead = leads.find(l => l.id === id);
+  if (lead) {
+    const statusFlow = ['new', 'contacted', 'converted', 'lost'];
+    const idx = statusFlow.indexOf(lead.status || 'new');
+    lead.status = statusFlow[Math.min(idx + 1, statusFlow.length - 1)];
+    localStorage.setItem('vaani_leads', JSON.stringify(leads));
+    renderLeads();
+  }
+}
+
+function updateLeadsBadge() {
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  const newCount = leads.filter(l => l.status === 'new').length;
+  document.getElementById('leadsBadge').textContent = newCount > 0 ? newCount : '';
+}
+
+function exportLeads() {
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  if (!leads.length) { showToast('No leads to export', true); return; }
+  const csv = 'Name,Mobile,Query,Priority,Status,Date,Source\n' +
+    leads.map(l => `"${l.name}","${l.mobile}","${l.query}","${l.priority}","${l.status}","${l.date}","${l.source}"`).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `vaani-leads-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  showToast('Leads exported!');
+}
+
+// =========== ANALYTICS ===========
+function tagTopics(text, session) {
+  const topicKeys = {
+    'price': ['price','rate','cost','kitna','kitni','fees','charge','rupee','₹'],
+    'timing': ['timing','time','open','close','kab','hours','schedule'],
+    'delivery': ['delivery','deliver','ghar','home','bhejo'],
+    'appointment': ['appointment','book','slot','milna','aana'],
+    'services': ['service','product','kya milta','available','stock'],
+    'location': ['location','address','kahan','directions','map'],
+    'emergency': ['emergency','urgent','jaldi','abhi'],
+    'other': []
+  };
+  const lower = text.toLowerCase();
+  if (!session.topics) session.topics = [];
+  for (const [topic, keywords] of Object.entries(topicKeys)) {
+    if (topic === 'other') continue;
+    if (keywords.some(k => lower.includes(k)) && !session.topics.includes(topic)) {
+      session.topics.push(topic);
+    }
+  }
+}
+
+function renderAnalytics() {
+  const sessions = JSON.parse(localStorage.getItem('vaani_sessions') || '[]');
+  const leads = JSON.parse(localStorage.getItem('vaani_leads') || '[]');
+  const now = Date.now();
+  const periodMs = analyticsPeriod === 'week' ? 7 * 86400000 : 30 * 86400000;
+  const filtered = sessions.filter(s => s.start && (now - s.start) < periodMs);
+
+  document.getElementById('statConvos').textContent = filtered.length;
+  document.getElementById('statMessages').textContent = filtered.reduce((a, s) => a + (s.messages || 0), 0);
+
+  const durations = filtered.filter(s => s.duration).map(s => s.duration);
+  const avgDur = durations.length ? Math.round(durations.reduce((a, b) => a + b, 0) / durations.length / 60000) : 0;
+  document.getElementById('statAvgTime').textContent = avgDur + 'm';
+
+  const periodLeads = leads.filter(l => l.date && (now - new Date(l.date).getTime()) < periodMs);
+  document.getElementById('statLeads').textContent = periodLeads.length;
+
+  // Peak hours chart
+  const hourCounts = new Array(24).fill(0);
+  filtered.forEach(s => { if (s.start) hourCounts[new Date(s.start).getHours()]++; });
+  const maxH = Math.max(...hourCounts, 1);
+  const peakHours = [9,10,11,12,13,14,15,16,17,18,19,20];
+  document.getElementById('peakChart').innerHTML = peakHours.map(h => {
+    const pct = Math.round((hourCounts[h] / maxH) * 100);
+    return `<div class="bar-row"><span class="bar-label">${h}:00</span><div class="bar-track"><div class="bar-fill" style="width:${Math.max(pct, 2)}%">${hourCounts[h] || ''}</div></div></div>`;
+  }).join('');
+
+  // Topics
+  const topicCount = {};
+  filtered.forEach(s => (s.topics || []).forEach(t => { topicCount[t] = (topicCount[t] || 0) + 1; }));
+  const sortedTopics = Object.entries(topicCount).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  document.getElementById('topicsList').innerHTML = sortedTopics.length
+    ? sortedTopics.map(([t, c]) => `<div class="topic-row"><span class="topic-name">${t}</span><span class="topic-count">${c}</span></div>`).join('')
+    : '<p style="color:var(--text3);font-size:13px;text-align:center;padding:12px">Start conversations to see topic data.</p>';
+}
+
+function setAnalyticsPeriod(p, btn) {
+  analyticsPeriod = p;
+  document.querySelectorAll('.analytics-container .filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderAnalytics();
+}
+
+// =========== UTILS ===========
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  return days + 'd ago';
+}
+
+function showToast(msg, isError) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast' + (isError ? ' error' : '');
+  requestAnimationFrame(() => el.classList.add('show'));
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// =========== PWA REGISTER ===========
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+
+</script>
+</body>
+</html>
