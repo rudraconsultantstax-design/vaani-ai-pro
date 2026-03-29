@@ -1020,24 +1020,8 @@ async function sendMessage(text) {
       data = await resp.json();
       if (data.error) throw new Error(data.error);
     } catch (proxyErr) {
-      // Fallback to direct API call
-      console.log('Proxy failed, using direct API:', proxyErr.message);
-      const resp2 = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': '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',
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify(payload)
-      });
-      if (!resp2.ok) {
-        const errData = await resp2.json().catch(() => ({}));
-        throw new Error(errData.error?.message || `API error ${resp2.status}`);
-      }
-      data = await resp2.json();
-    }
+          throw new Error('AI service error: ' + proxyErr.message);
+        }
 
     showTyping(false);
     const aiText = data.content?.[0]?.text || 'Sorry, I could not process your request.';
