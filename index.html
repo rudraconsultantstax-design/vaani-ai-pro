@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>वाणी AI Pro — Jaipur ka Business AI</title>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --purple: #7C3AED;
@@ -253,7 +253,7 @@ const Nav = ({ page, setPage }) => {
             Free में शुरू करें →
           </button>
         </div>
-        <button className="md:hidden" onClick={()=>setMobileOpen(!mobileOpen)}><Icon name="menu" size={22}/></button>
+        <button className="md:hidden" onClick={()=>setMobileOpen(!mobileOpen)}><Icon name="menu" size={22}></button>
       </div>
       {mobileOpen && (
         <div style={{background:"white",borderTop:"1px solid #E5D9FF",padding:"12px 16px"}}>
@@ -291,9 +291,9 @@ const Landing = ({ setPage }) => {
     <div>
       {/* HERO */}
       <section className="hero-gradient" style={{minHeight:"90vh",display:"flex",alignItems:"center",position:"relative"}}>
-        <div className="hero-grid"/>
-        <div className="hero-orb" style={{width:400,height:400,top:-100,right:-100,opacity:0.3}}/>
-        <div className="hero-orb" style={{width:200,height:200,bottom:50,left:50,opacity:0.2,animationDelay:"2s"}}/>
+        <div className="hero-grid">
+        <div className="hero-orb" style={{width:400,height:400,top:-100,right:-100,opacity:0.3}}>
+        <div className="hero-orb" style={{width:200,height:200,bottom:50,left:50,opacity:0.2,animationDelay:"2s"}}>
         <div className="max-w-7xl mx-auto px-4 py-24 relative z-10" style={{width:"100%"}}>
           <div className="text-center fade-in-up">
             <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(245,158,11,0.15)",border:"1px solid rgba(245,158,11,0.4)",borderRadius:24,padding:"6px 18px",marginBottom:24}}>
@@ -301,10 +301,10 @@ const Landing = ({ setPage }) => {
             </div>
             <h1 className="display" style={{fontSize:"clamp(2.2rem,6vw,4.5rem)",fontWeight:900,color:"white",lineHeight:1.15,marginBottom:16}}>
               Jaipur ke Har Business ka
-              <br/><span style={{background:"linear-gradient(90deg,#F59E0B,#FCD34D)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>AI Sahayak</span>
+              <br><span style={{background:"linear-gradient(90deg,#F59E0B,#FCD34D)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>AI Sahayak</span>
             </h1>
             <p className="hindi" style={{fontSize:"clamp(1rem,2.5vw,1.25rem)",color:"rgba(255,255,255,0.7)",maxWidth:600,margin:"0 auto 32px",lineHeight:1.7}}>
-              अपने business में AI-powered chat assistant लगाएं। <br/>Leads capture करें, bookings लें, 24/7 customer support दें।
+              अपने business में AI-powered chat assistant लगाएं। <br>Leads capture करें, bookings लें, 24/7 customer support दें।
             </p>
             <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
               <button onClick={()=>setPage("/business")} style={{background:"linear-gradient(135deg,#F59E0B,#D97706)",color:"#1C0A00",borderRadius:12,padding:"14px 32px",fontWeight:700,fontSize:16,boxShadow:"0 8px 32px rgba(245,158,11,0.4)",cursor:"pointer"}}>
@@ -337,7 +337,7 @@ const Landing = ({ setPage }) => {
             {features.map((f,i)=>(
               <div key={i} className="card-hover" style={{background:"#FAFAFE",border:"1px solid #EDE9FE",borderRadius:16,padding:28}}>
                 <div className="feature-icon" style={{background:`${f.color}18`,marginBottom:16}}>
-                  <Icon name={f.icon} size={24}/>
+                  <Icon name={f.icon} size={24}>
                 </div>
                 <h3 style={{fontWeight:700,marginBottom:8,color:"#1E1535"}}>{f.title}</h3>
                 <p className="hindi" style={{color:"#6B7280",fontSize:14,lineHeight:1.6}}>{f.desc}</p>
@@ -486,7 +486,7 @@ const AdminDashboard = () => {
             <div key={item.id} onClick={()=>setActiveSidebar(item.id)}
               className={`sidebar-item ${activeSidebar===item.id?"active":""}`}
               style={{color: activeSidebar===item.id?"#A78BFA":"rgba(255,255,255,0.55)", marginBottom:2}}>
-              <Icon name={item.icon} size={16}/>
+              <Icon name={item.icon} size={16}>
               <span style={{fontSize:13,fontWeight:500}}>{item.label}</span>
             </div>
           ))}
@@ -530,7 +530,7 @@ const AdminDashboard = () => {
                   <div style={{fontSize:24,fontWeight:900,color:k.color}}>{k.val}</div>
                   <div style={{fontSize:11,color:"#22C55E",marginTop:4}}>↑ {k.sub}</div>
                 </div>
-                <div style={{fontSize:26,opacity:0.4}}><Icon name={k.icon} size={28}/></div>
+                <div style={{fontSize:26,opacity:0.4}}><Icon name={k.icon} size={28}></div>
               </div>
             </div>
           ))}
@@ -551,7 +551,7 @@ const AdminDashboard = () => {
               {monthlyData.map((d,i)=>(
                 <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
                   <div style={{fontSize:10,color:"#9CA3AF",fontWeight:600}}>₹{d.val}k</div>
-                  <div className="bar" style={{width:"100%",height:`${(d.val/maxVal)*110}px`,borderRadius:"6px 6px 0 0",background:i===monthlyData.length-1?"linear-gradient(180deg,#7C3AED,#5B21B6)":"linear-gradient(180deg,#A78BFA,#C4B5FD)"}}/>
+                  <div className="bar" style={{width:"100%",height:`${(d.val/maxVal)*110}px`,borderRadius:"6px 6px 0 0",background:i===monthlyData.length-1?"linear-gradient(180deg,#7C3AED,#5B21B6)":"linear-gradient(180deg,#A78BFA,#C4B5FD)"}}>
                   <div style={{fontSize:11,color:"#6B7280"}}>{d.month}</div>
                 </div>
               ))}
@@ -567,7 +567,7 @@ const AdminDashboard = () => {
                   <span style={{fontSize:12,color:"#6B7280"}}>{p.count} biz</span>
                 </div>
                 <div style={{height:8,background:"#F3F4F6",borderRadius:4,overflow:"hidden"}}>
-                  <div style={{height:"100%",width:`${(p.count/47)*100}%`,background:p.color,borderRadius:4,transition:"width 0.8s ease"}}/>
+                  <div style={{height:"100%",width:`${(p.count/47)*100}%`,background:p.color,borderRadius:4,transition:"width 0.8s ease"}}>
                 </div>
               </div>
             ))}
@@ -578,7 +578,7 @@ const AdminDashboard = () => {
         <div style={{background:"white",borderRadius:16,border:"1px solid #EDE9FE",overflow:"hidden"}}>
           <div style={{padding:"16px 20px",borderBottom:"1px solid #EDE9FE",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <h3 style={{fontWeight:700,color:"#0F0A1E",fontSize:15}}>Registered Businesses</h3>
-            <input placeholder="🔍 Search..." style={{border:"1px solid #EDE9FE",borderRadius:8,padding:"6px 12px",fontSize:13,outline:"none",width:180}}/>
+            <input placeholder="🔍 Search..." style={{border:"1px solid #EDE9FE",borderRadius:8,padding:"6px 12px",fontSize:13,outline:"none",width:180}}>
           </div>
           <div style={{overflowX:"auto"}}>
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
@@ -650,7 +650,7 @@ const BusinessPortal = () => {
             <div key={item.id} onClick={()=>setActiveSidebar(item.id)}
               className={`sidebar-item ${activeSidebar===item.id?"active":""}`}
               style={{color: activeSidebar===item.id?"#7C3AED":"#6B7280", marginBottom:2}}>
-              <Icon name={item.icon} size={15}/>
+              <Icon name={item.icon} size={15}>
               <span style={{fontSize:13,fontWeight:500}}>{item.label}</span>
             </div>
           ))}
@@ -667,11 +667,11 @@ const BusinessPortal = () => {
           </div>
           <div style={{display:"flex",gap:8}}>
             <div style={{background:"white",border:"1px solid #EDE9FE",borderRadius:8,padding:"8px 14px",fontSize:12,color:"#374151",display:"flex",alignItems:"center",gap:6}}>
-              <div style={{width:8,height:8,borderRadius:"50%",background:"#22C55E"}}/>
+              <div style={{width:8,height:8,borderRadius:"50%",background:"#22C55E"}}>
               Vaani Active
             </div>
             <div style={{background:"linear-gradient(135deg,#7C3AED,#5B21B6)",color:"white",borderRadius:8,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>
-              <Icon name="gear" size={13}/> Settings
+              <Icon name="gear" size={13}> Settings
             </div>
           </div>
         </div>
@@ -692,7 +692,7 @@ const BusinessPortal = () => {
                   <div style={{fontSize:11,color:"#6B7280",marginTop:3}}>{k.sub}</div>
                 </div>
                 <div style={{width:40,height:40,borderRadius:10,background:k.light,display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <Icon name={k.icon} size={18}/>
+                  <Icon name={k.icon} size={18}>
                 </div>
               </div>
             </div>
@@ -733,7 +733,7 @@ const BusinessPortal = () => {
               <h3 style={{fontWeight:700,color:"#0F0A1E",fontSize:14,marginBottom:16}}>Messages by Hour</h3>
               <div style={{display:"flex",alignItems:"flex-end",gap:4,height:80}}>
                 {[20,45,60,35,80,95,70,40,85,60,30,15].map((v,i)=>(
-                  <div key={i} style={{flex:1,height:`${(v/95)*100}%`,borderRadius:"3px 3px 0 0",background:v>80?"linear-gradient(180deg,#7C3AED,#5B21B6)":"linear-gradient(180deg,#C4B5FD,#DDD6FE)"}}/>
+                  <div key={i} style={{flex:1,height:`${(v/95)*100}%`,borderRadius:"3px 3px 0 0",background:v>80?"linear-gradient(180deg,#7C3AED,#5B21B6)":"linear-gradient(180deg,#C4B5FD,#DDD6FE)"}}>
                 ))}
               </div>
               <div style={{display:"flex",justifyContent:"space-between",marginTop:6}}>
@@ -744,7 +744,7 @@ const BusinessPortal = () => {
             <div style={{background:"linear-gradient(135deg,#0F0A1E,#1E1535)",borderRadius:16,padding:20}}>
               <div style={{fontSize:11,color:"rgba(255,255,255,0.5)",marginBottom:4}}>VAANI AI STATUS</div>
               <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
-                <div style={{width:10,height:10,borderRadius:"50%",background:"#22C55E",boxShadow:"0 0 8px #22C55E"}}/>
+                <div style={{width:10,height:10,borderRadius:"50%",background:"#22C55E",boxShadow:"0 0 8px #22C55E"}}>
                 <span style={{color:"white",fontSize:14,fontWeight:700}}>Online & Active</span>
               </div>
               <div style={{fontSize:12,color:"rgba(255,255,255,0.4)",lineHeight:1.7}}>
@@ -838,7 +838,7 @@ const ChatWidgetPage = () => {
           {/* Browser bar */}
           <div style={{background:"#F3F4F6",padding:"10px 16px",display:"flex",alignItems:"center",gap:8,borderBottom:"1px solid #E5E7EB"}}>
             <div style={{display:"flex",gap:5}}>
-              {["#EF4444","#F59E0B","#22C55E"].map(c=><div key={c} style={{width:10,height:10,borderRadius:"50%",background:c}}/>)}
+              {["#EF4444","#F59E0B","#22C55E"].map(c=><div key={c} style={{width:10,height:10,borderRadius:"50%",background:c}}>)}
             </div>
             <div style={{flex:1,background:"white",borderRadius:6,padding:"4px 12px",fontSize:11,color:"#9CA3AF",border:"1px solid #E5E7EB"}}>
               🔒 www.prabhatsteel.com
@@ -848,9 +848,9 @@ const ChatWidgetPage = () => {
           {/* Website content simulation */}
           <div style={{padding:"32px 40px",minHeight:400,position:"relative",background:"linear-gradient(180deg,#fff 0%,#FAFAFE 100%)"}}>
             <div style={{marginBottom:16}}>
-              <div style={{width:120,height:8,background:"#7C3AED",borderRadius:4,marginBottom:8}}/>
-              <div style={{width:220,height:5,background:"#E5E7EB",borderRadius:4,marginBottom:4}}/>
-              <div style={{width:180,height:5,background:"#E5E7EB",borderRadius:4}}/>
+              <div style={{width:120,height:8,background:"#7C3AED",borderRadius:4,marginBottom:8}}>
+              <div style={{width:220,height:5,background:"#E5E7EB",borderRadius:4,marginBottom:4}}>
+              <div style={{width:180,height:5,background:"#E5E7EB",borderRadius:4}}>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:20}}>
               {["TMT Saria","Binding Wire","MS Plate"].map(item=>(
@@ -874,12 +874,12 @@ const ChatWidgetPage = () => {
                 <div className="widget-header">
                   <div className="widget-avatar" style={{position:"relative"}}>
                     <span style={{fontSize:20}}>🤖</span>
-                    <div className="online-dot" style={{position:"absolute",bottom:1,right:1}}/>
+                    <div className="online-dot" style={{position:"absolute",bottom:1,right:1}}>
                   </div>
                   <div style={{flex:1}}>
                     <div style={{fontWeight:700,fontSize:14}}>Vaani — Prabhat Steel</div>
                     <div style={{fontSize:11,opacity:0.7,display:"flex",alignItems:"center",gap:4}}>
-                      <div style={{width:6,height:6,borderRadius:"50%",background:"#22C55E"}}/>
+                      <div style={{width:6,height:6,borderRadius:"50%",background:"#22C55E"}}>
                       Online • Abhi jawab denge
                     </div>
                   </div>
@@ -900,9 +900,9 @@ const ChatWidgetPage = () => {
                     <div style={{display:"flex",alignItems:"flex-start",gap:4}}>
                       <div className="chat-bubble-bot" style={{padding:"10px 14px"}}>
                         <div style={{display:"flex",gap:5,alignItems:"center"}}>
-                          <div className="typing-dot"/>
-                          <div className="typing-dot"/>
-                          <div className="typing-dot"/>
+                          <div className="typing-dot">
+                          <div className="typing-dot">
+                          <div className="typing-dot">
                         </div>
                       </div>
                     </div>
@@ -925,9 +925,9 @@ const ChatWidgetPage = () => {
                     placeholder="कुछ भी पूछें..."
                     className="hindi"
                     style={{flex:1,border:"1.5px solid #EDE9FE",borderRadius:10,padding:"8px 12px",fontSize:13,outline:"none",fontFamily:"inherit"}}
-                  />
+                 >
                   <button onClick={()=>sendMessage(input)} style={{background:"linear-gradient(135deg,#7C3AED,#5B21B6)",color:"white",border:"none",borderRadius:10,width:38,height:38,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-                    <Icon name="send" size={14}/>
+                    <Icon name="send" size={14}>
                   </button>
                 </div>
               </div>
@@ -984,16 +984,16 @@ const App = () => {
 
   return (
     <div>
-      <Nav page={page} setPage={navigateTo}/>
-      {page==="/" && <Landing setPage={navigateTo}/>}
-      {page==="/admin" && <AdminDashboard/>}
-      {page==="/business" && <BusinessPortal/>}
-      {page==="/widget" && <ChatWidgetPage/>}
+      <Nav page={page} setPage={navigateTo}>
+      {page==="/" && <Landing setPage={navigateTo}>}
+      {page==="/admin" && <AdminDashboard>}
+      {page==="/business" && <BusinessPortal>}
+      {page==="/widget" && <ChatWidgetPage>}
     </div>
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+ReactDOM.createRoot(document.getElementById("root")).render(<App>);
 </script>
 </body>
 </html>
