@@ -217,7 +217,7 @@ const Icon = ({ name, size=20, className="" }) => {
   const icons = {
     bot: "🤖", chart: "📊", users: "👥", rupee: "₹", msg: "💬", star: "⭐",
     check: "✓", arrow: "→", menu: "☰", close: "✕", send: "➤", phone: "📞",
-    loc: "📍", building: "🏢", hotel: "🏨", clinic: "🏥", steel: "🔩",
+    loc: "📍", building: "🏢", hotel: "🏨", clinic: "🏥", steel: "💼",
     home: "🏠", leads: "🎯", spark: "✨", shield: "🛡️", zap: "⚡", brain: "🧠",
     globe: "🌐", clock: "🕐", trend: "📈", gear: "⚙️", bell: "🔔", fire: "🔥",
     real: "🏘️", doc: "📄",
@@ -433,7 +433,7 @@ const Landing = ({ setPage }) => {
           </div>
           <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:20,display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
             <span style={{fontSize:12}}>© 2026 वाणी AI Pro — Made with ❤️ in Jaipur, Rajasthan</span>
-            <span style={{fontSize:12}}>THE_CONSULTINGCREW@outlook.com | +91-9251022710</span>
+            <span style={{fontSize:12}}>the_consultingcrew@outlook.com | +91-9251022710 | 0141-4489577</span>
           </div>
         </div>
       </footer>
@@ -799,10 +799,10 @@ const ChatWidgetPage = () => {
   const quickReplies = ["Services देखें 📊","Consult करें 🛒","Location 📍","Call करें 📞"];
 
   const botResponses = {
-    "Services देखें 📊": "GST Filing (Fe 500D) aaj ka rate:\n• 8mm: ₹58/kg\n• 10mm: ₹57/kg\n• 12mm: ₹56/kg\n• 16mm: ₹55/kg\n\nBulk order pe special discount milega! Kitni quantity chahiye?",
-    "Consult करें 🛒": "Order karne ke liye yeh details dijiye:\n• Product type\n• Quantity (kg mein)\n• Delivery address\n• Aapka naam & phone\n\nHum 24-48 hours mein delivery karte hain Jaipur mein! 🚛",
-    "Location 📍": "📍 The Consulting Crew Trading\nC-11, Shyam Nagar, Jaipur - 302019\n\nSomwar - Shanivaar: 9 AM - 7 PM\nGoogle Maps pe 'The Consulting Crew Trading' search karein.",
-    "Call करें 📞": "📞 Direct call karein:\n+91-9828-363-536 (Team TCC)\n\nYa aap apna number dijiye, hum aapko call back karenge within 15 minutes! 😊",
+    "Services देखें 📊": "TCC ki compliance services:\n• GST Filing: ₹2,499/year se\n• ITR Filing: ₹999 se\n• TDS Returns: ₹1,499/quarter\n• Company Registration: ₹5,999\n\nKaunsi service chahiye aapko?",
+    "Consult करें 🛒": "Free consultation book karne ke liye yeh details dijiye:\n• Business type\n• Service chahiye (GST/ITR/TDS/Registration)\n• Aapka naam & phone\n\nHum 2 hours mein call back karenge! 🚛",
+    "Location 📍": "📍 The Consulting Crew\nG-02, C-71, Swastik Heights, Gandhi Path West, Vaishali Nagar, Jaipur - 302021\n\nSomwar - Shanivaar: 10 AM - 7 PM\nGoogle Maps pe 'The Consulting Crew Jaipur' search karein.",
+    "Call करें 📞": "📞 Direct call karein:\n+91-9251022710 (Team TCC)\n\nYa aap apna number dijiye, hum aapko call back karenge within 15 minutes! 😊",
   };
 
   const sendMessage = (text) => {
@@ -841,7 +841,7 @@ const ChatWidgetPage = () => {
               {["#EF4444","#F59E0B","#22C55E"].map(c=><div key={c} style={{width:10,height:10,borderRadius:"50%",background:c}}/>)}
             </div>
             <div style={{flex:1,background:"white",borderRadius:6,padding:"4px 12px",fontSize:11,color:"#9CA3AF",border:"1px solid #E5E7EB"}}>
-              🔒 www.consultingcrew.com
+              🔒 www.consultingcrew.in
             </div>
           </div>
 
@@ -855,15 +855,15 @@ const ChatWidgetPage = () => {
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:20}}>
               {["GST Filing","ITR Filing","MSME Registration"].map(item=>(
                 <div key={item} style={{background:"#F8F5FF",border:"1px solid #EDE9FE",borderRadius:10,padding:"12px 14px"}}>
-                  <div style={{width:40,height:40,borderRadius:8,background:"linear-gradient(135deg,#EDE9FE,#DDD6FE)",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>🔩</div>
+                  <div style={{width:40,height:40,borderRadius:8,background:"linear-gradient(135deg,#EDE9FE,#DDD6FE)",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>💼</div>
                   <div style={{fontWeight:700,fontSize:12,color:"#0F0A1E",marginBottom:2}}>{item}</div>
-                  <div style={{fontSize:11,color:"#9CA3AF"}}>Best rates</div>
+                  <div style={{fontSize:11,color:"#9CA3AF"}}>Expert services</div>
                 </div>
               ))}
             </div>
             <div style={{background:"linear-gradient(135deg,#0F0A1E,#3B1A72)",borderRadius:12,padding:16,color:"white",marginBottom:16}}>
               <div style={{fontWeight:700,marginBottom:4,fontSize:14}}>🏆 Jaipur ka Trusted Compliance Partner</div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,0.6)"}}>50+ Clients | CA Certified | Same Day Support</div>
+              <div style={{fontSize:12,color:"rgba(255,255,255,0.6)"}}>1,100+ Clients | CA/CS/CMA Certified | Pan-India Network</div>
             </div>
             <div style={{color:"#6B7280",fontSize:11,textAlign:"center",marginTop:8}}>↑ यह The Consulting Crew की website का simulation है — Vaani widget नीचे right corner में है ↓</div>
 
