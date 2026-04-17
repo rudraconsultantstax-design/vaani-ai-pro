@@ -1,0 +1,243 @@
+{
+  "version": "1.0.0",
+  "release": "v1.0 Production — Apr 2026",
+  "updatedAt": "2026-04-17",
+  "sources": {
+    "pricing": "https://consultingcrew.in/pricing",
+    "website": "https://consultingcrew.in",
+    "digitalHub": "https://tcc-digital-hub.netlify.app/app-prototype/",
+    "customerChat": "https://vaani-ai-agent.netlify.app/",
+    "paiseKiPathshala": "https://rudraconsultantstax-design.github.io/paise-ki-pathshala/"
+  },
+  "entity": {
+    "tradingName": "The Consulting Crew",
+    "legalName": "Paise Ki Pathshala Pvt Ltd",
+    "cin": "U69200RJ2026PTC111856",
+    "pan": "ABJCP7313N",
+    "gstin": "08ABJCP7313N1ZD",
+    "registeredOffice": "C-71, Hastinapur, Vaishali Nagar, Jaipur 302021",
+    "email": "info@consultingcrew.in",
+    "secondaryEmail": "the_consultingcrew@outlook.com",
+    "phone": "+91 93521 15498",
+    "secondaryPhone": "+91 9251022710",
+    "landline": "0141-4489577",
+    "whatsapp": ["https://wa.me/919352115498", "https://wa.me/919251022710"],
+    "since": 2019,
+    "clientsServed": "1100+",
+    "onTimeFilingRate": "99%",
+    "citiesServed": ["Jaipur", "Delhi NCR", "Ahmedabad", "Mumbai", "Hyderabad", "Bengaluru", "Kolkata"]
+  },
+  "tccPlans": [
+    {
+      "id": "foundation-lite",
+      "name": "Foundation Lite",
+      "priceYear": 29999,
+      "popular": false,
+      "features": [
+        "GST registration support",
+        "GSTR-1 and GSTR-3B filing support",
+        "Basic ITR filing",
+        "Quarterly review",
+        "WhatsApp reminders",
+        "Portal access"
+      ]
+    },
+    {
+      "id": "foundation-shield",
+      "name": "Foundation Shield",
+      "priceYear": 54999,
+      "popular": false,
+      "features": [
+        "Everything in Foundation Lite",
+        "Full GST compliance support",
+        "TDS return support",
+        "ESIC and PF support",
+        "Basic bookkeeping",
+        "Quarterly review"
+      ]
+    },
+    {
+      "id": "compliance-control",
+      "name": "Compliance Control",
+      "priceYear": 114999,
+      "popular": true,
+      "features": [
+        "Everything in Foundation Shield",
+        "Full bookkeeping support",
+        "MIS reports",
+        "ROC filing support",
+        "Monthly review",
+        "Dedicated account manager",
+        "Notice support"
+      ]
+    },
+    {
+      "id": "financial-armour",
+      "name": "Financial Armour",
+      "priceYear": 219999,
+      "popular": false,
+      "features": [
+        "Everything in Compliance Control",
+        "Virtual CFO support",
+        "Cash flow planning",
+        "Project finance support",
+        "Audit coordination",
+        "Two review meetings per month"
+      ]
+    },
+    {
+      "id": "governance-suite",
+      "name": "Governance Suite",
+      "priceYear": 299999,
+      "popular": false,
+      "features": [
+        "Everything in Financial Armour",
+        "Internal audit support",
+        "Management dashboards",
+        "Regulatory impact advisory",
+        "Escalation support",
+        "Four review meetings per month"
+      ]
+    }
+  ],
+  "tccServices": {
+    "compliance": [
+      {"key": "gst", "title": "GST Compliance", "items": ["Registration", "GSTR-1", "GSTR-3B", "GSTR-9", "GSTR-9C", "ITC reconciliation", "Notice handling", "Health check"]},
+      {"key": "income_tax", "title": "Income Tax", "items": ["ITR-1 to ITR-7", "Tax audit u/s 44AB", "Scrutiny response", "Advance tax planning"]},
+      {"key": "tds", "title": "TDS", "items": ["24Q / 26Q / 27Q quarterly returns", "Form 16 / 16A issuance", "TRACES management", "Corrections"]},
+      {"key": "roc_mca", "title": "ROC / MCA", "items": ["MGT-7", "AOC-4", "DIR-3 KYC", "LLP Form 8 and 11", "Annual compliance"]},
+      {"key": "company_reg", "title": "Company Registration", "items": ["Pvt Ltd", "LLP", "OPC", "Partnership", "Section 8", "DPIIT Startup India"]},
+      {"key": "payroll", "title": "Payroll", "items": ["PF", "ESIC", "Professional Tax", "Salary structuring", "CTC optimisation"]},
+      {"key": "audit", "title": "Audit Support", "items": ["Statutory", "Tax (44AB)", "GST", "Internal", "Forensic"]},
+      {"key": "notice", "title": "Notice Management", "items": ["GST notice reply", "IT scrutiny", "TDS default", "Department representation"]},
+      {"key": "vcfo", "title": "Virtual CFO", "items": ["Cash flow forecasting", "MIS", "P&L and Balance Sheet", "Investor MIS"]},
+      {"key": "trademark", "title": "Trademark and IP", "items": ["Trademark registration", "Search", "Objection handling", "Renewal"]},
+      {"key": "import_export", "title": "Import / Export", "items": ["IEC registration", "DGFT compliance", "Export docs", "FSSAI licensing"]},
+      {"key": "rera", "title": "RERA Compliance", "items": ["Registration", "Quarterly updates", "Project completion"]},
+      {"key": "msme", "title": "Udyam / MSME", "items": ["Free Udyam registration", "Shops and Establishment", "Professional Tax registration"]}
+    ],
+    "digitalMarketing": [
+      {"key": "gbp", "title": "Google Business Profile", "priceFrom": 5000, "unit": "month", "note": "Setup, optimisation, review management, local SEO"},
+      {"key": "google_ads", "title": "Google Ads and PPC", "priceFrom": 8000, "unit": "month", "note": "Plus ad spend. Search, display, remarketing, shopping, YouTube"},
+      {"key": "smm", "title": "Social Media Marketing", "priceFrom": 10000, "unit": "month", "note": "IG, FB, LinkedIn, X strategy and posting"},
+      {"key": "smm_manage", "title": "Social Media Management", "priceFrom": 12000, "unit": "month", "note": "Profile optimisation, community management, influencer outreach"},
+      {"key": "creative", "title": "Creative Content", "priceFrom": 3000, "unit": "creative", "note": "Reels, carousels, infographics, motion graphics"},
+      {"key": "launch", "title": "Launch Campaigns", "priceFrom": 25000, "unit": "package", "note": "Shoot, PR, ads blitz, post-launch analysis"},
+      {"key": "profiling", "title": "Internet Profiling and ORM", "priceFrom": null, "unit": "custom", "note": "Wikipedia assist, LinkedIn, directory listings, knowledge panel"},
+      {"key": "seo", "title": "SEO", "priceFrom": 15000, "unit": "month", "note": "On-page, off-page, technical, keyword research, backlinks"},
+      {"key": "web", "title": "Website Design and Development", "priceFrom": 15000, "unit": "project", "note": "Business sites, e-commerce, landing pages, PWA"},
+      {"key": "email", "title": "Email Marketing", "priceFrom": 5000, "unit": "month", "note": "Campaign design, automation, newsletters"}
+    ],
+    "customised": {
+      "title": "Customised Solutions",
+      "description": "Tailored compliance + digital combo packages, industry-specific solutions, project-based engagements, annual retainers. Pricing per scope, timeline, and deliverables."
+    }
+  },
+  "vaaniPlans": [
+    {
+      "name": "Free",
+      "priceMonth": 0,
+      "features": ["1 AI agent", "500 messages per month", "Basic analytics", "Email support"]
+    },
+    {
+      "name": "Basic",
+      "priceMonth": 999,
+      "features": ["3 AI agents", "5,000 messages per month", "Lead management", "WhatsApp integration", "Priority support"]
+    },
+    {
+      "name": "Pro",
+      "priceMonth": 2499,
+      "popular": true,
+      "features": ["10 AI agents", "25,000 messages per month", "Advanced analytics", "CRM integration", "Booking system", "Dedicated manager"]
+    },
+    {
+      "name": "Enterprise",
+      "priceMonth": 4999,
+      "features": ["Unlimited agents", "Unlimited messages", "Custom AI training", "API access", "White label", "24/7 phone support"]
+    }
+  ],
+  "paiseKiPathshala": {
+    "name": "Paise Ki Pathshala",
+    "tagline": "EDUCATE — INVEST — GROW",
+    "description": "Sister financial literacy brand by the same team. Educates Indian MSMEs and families on money, tax, insurance, and investment. Cross-sell for customers who want financial literacy content.",
+    "url": "https://rudraconsultantstax-design.github.io/paise-ki-pathshala/"
+  },
+  "digitalHub": {
+    "name": "TCC Digital Hub",
+    "description": "Client dashboard for compliance calendar, document vault, notices, reports, and filings status. Direct all existing clients here for their filings.",
+    "url": "https://tcc-digital-hub.netlify.app/app-prototype/",
+    "modules": ["Compliance calendar", "Document vault", "Notices tracker", "Reports", "Filings status"]
+  },
+  "complianceFaq": {
+    "gst": [
+      {"q": "GSTR-1 due date?", "a": "11th of the following month for monthly filers. QRMP IFF is 13th of the month following each of the first two months of a quarter."},
+      {"q": "GSTR-3B due date?", "a": "20th of the following month for monthly filers. QRMP filers file on 22nd or 24th depending on state group."},
+      {"q": "GSTR-9 annual return?", "a": "Due 31st December of the next financial year. Mandatory when turnover exceeds Rs 2 crore. GSTR-9C (self-certified reconciliation) applies above Rs 5 crore."},
+      {"q": "Late fee for GSTR-3B?", "a": "Rs 50 per day of delay (Rs 20 per day for nil return), capped. Interest at 18% per annum on tax liability."},
+      {"q": "What is ITC?", "a": "Input Tax Credit is the GST paid on purchases that a registered business can offset against GST collected on sales, subject to matching with GSTR-2B and supplier compliance."}
+    ],
+    "incomeTax": [
+      {"q": "Which ITR form applies to me?", "a": "ITR-1 Sahaj for resident individuals with salary or one house and income up to Rs 50 lakh. ITR-2 for capital gains or more than one house. ITR-3 for business or profession. ITR-4 Sugam for presumptive 44AD/44ADA/44AE. ITR-5/6/7 for firms and LLPs, companies, and trusts respectively."},
+      {"q": "When is advance tax due?", "a": "15 June (15%), 15 September (45% cumulative), 15 December (75%), 15 March (100%)."},
+      {"q": "Tax audit threshold?", "a": "Section 44AB applies when business turnover exceeds Rs 1 crore (Rs 10 crore if cash receipts and payments are under 5%), or professional receipts exceed Rs 50 lakh."}
+    ],
+    "tds": [
+      {"q": "TDS return due dates?", "a": "Q1 by 31 July, Q2 by 31 October, Q3 by 31 January, Q4 by 31 May."},
+      {"q": "Form 16 issuance?", "a": "By 15 June following the financial year end."}
+    ],
+    "roc": [
+      {"q": "Pvt Ltd annual filings?", "a": "AOC-4 within 30 days of AGM, MGT-7 within 60 days of AGM, DIR-3 KYC by 30 September each year."},
+      {"q": "LLP annual filings?", "a": "Form 8 (Statement of Accounts) by 30 October, Form 11 (Annual Return) by 30 May."}
+    ],
+    "msme": [
+      {"q": "Udyam registration?", "a": "Free online registration at udyamregistration.gov.in using Aadhaar and PAN. Entitles MSMEs to priority sector lending, subsidies, and delayed-payment protection."},
+      {"q": "Startup India benefits?", "a": "DPIIT recognition gives 3-year tax holiday u/s 80-IAC, angel tax relief, self-certification on labour/environment laws, and access to Fund of Funds."}
+    ],
+    "other": [
+      {"q": "Professional Tax?", "a": "State-specific tax on income from profession or employment. Applicable in Maharashtra, Karnataka, West Bengal, Gujarat, Tamil Nadu and others. Slab rates and due dates vary by state."},
+      {"q": "Shops and Establishment?", "a": "State-level registration required for commercial premises. Governs working hours, holidays, and worker welfare. Typically renewed annually or periodically."},
+      {"q": "FSSAI licence?", "a": "Required for food business. Basic (turnover up to Rs 12 lakh), State (up to Rs 20 crore), Central (above Rs 20 crore or import/export)."}
+    ]
+  },
+  "targetIndustries": [
+    "Transport and logistics",
+    "Real estate and RERA",
+    "Education societies and trusts",
+    "Furniture and home furnishings",
+    "Apparel and textile manufacturing",
+    "Jewellers and gem traders",
+    "Handicraft exporters",
+    "Startups",
+    "E-commerce sellers",
+    "Manufacturers and MSMEs"
+  ],
+  "intents": {
+    "leadCapture": {
+      "trigger": ["pricing", "plan", "quote", "cost", "how much", "services", "start", "shuru", "join", "interested"],
+      "collect": ["name", "phone", "businessName", "city", "need"],
+      "storage": "/.netlify/functions/lead (fallback: localStorage key vaani_leads)",
+      "notifyEmail": "info@consultingcrew.in",
+      "confirmation": "Dhanyavaad. Humari team aapko WhatsApp par +91 93521 15498 se next business hour mein contact karegi."
+    },
+    "appointment": {
+      "slots": ["Mon-Sat 11:00 AM", "Mon-Sat 4:00 PM"],
+      "confirmVia": "https://wa.me/919352115498",
+      "confirmation": "Aapki appointment confirm karne ke liye WhatsApp par message bhej dein. Hum time slot reserve kar denge."
+    },
+    "outOfScope": {
+      "decline": "Yeh query TCC ke scope mein nahi aati. Main sirf compliance, taxation, aur digital marketing par madad kar sakti hoon. Kya aap apna naam aur phone share karein, hum aapko sahi team se connect karwa denge?",
+      "thenCaptureLead": true
+    },
+    "digitalHubRedirect": {
+      "trigger": ["filing status", "document upload", "compliance calendar", "notices", "reports", "dashboard"],
+      "reply": "Aapki filings, documents aur compliance calendar TCC Digital Hub par milenge: https://tcc-digital-hub.netlify.app/app-prototype/"
+    }
+  },
+  "controlCenterLinks": [
+    {"id": "digital-hub", "title": "TCC Digital Hub", "description": "Client portal, compliance calendar, document vault.", "url": "https://tcc-digital-hub.netlify.app/app-prototype/"},
+    {"id": "customer-chat", "title": "Customer Chat", "description": "Live Vaani chat agent used by end customers.", "url": "https://vaani-ai-agent.netlify.app/"},
+    {"id": "consulting-crew", "title": "Consulting Crew", "description": "Main TCC website — services, plans, team.", "url": "https://consultingcrew.in"},
+    {"id": "paise-ki-pathshala", "title": "Paise Ki Pathshala", "description": "Financial literacy sister brand.", "url": "https://rudraconsultantstax-design.github.io/paise-ki-pathshala/"},
+    {"id": "pricing", "title": "Pricing", "description": "Live launch plans and pricing page.", "url": "https://consultingcrew.in/pricing/"}
+  ]
+}

@@ -8,6 +8,7 @@
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="/sanitizer.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -233,6 +234,7 @@ const Nav = ({ page, setPage }) => {
     { hash: "/admin", label: "Admin" },
     { hash: "/business", label: "Business" },
     { hash: "/widget", label: "Chat Widget" },
+    { hash: "/control-center", label: "Control Center" },
   ];
   return (
     <nav className="nav-glass">
@@ -250,7 +252,7 @@ const Nav = ({ page, setPage }) => {
             >{l.label}</button>
           ))}
           <button onClick={()=>setPage("/business")} style={{background:"linear-gradient(135deg,#7C3AED,#5B21B6)",color:"white",borderRadius:8,padding:"8px 18px",fontSize:13,fontWeight:600,boxShadow:"0 4px 16px rgba(124,58,237,0.35)"}}>
-            Free में शुरू करें →
+            Free में शुरू करें
           </button>
         </div>
         <button className="md:hidden" onClick={()=>setMobileOpen(!mobileOpen)}><Icon name="menu" size={22}/></button>
@@ -308,10 +310,10 @@ const Landing = ({ setPage }) => {
             </p>
             <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
               <button onClick={()=>setPage("/business")} style={{background:"linear-gradient(135deg,#F59E0B,#D97706)",color:"#1C0A00",borderRadius:12,padding:"14px 32px",fontWeight:700,fontSize:16,boxShadow:"0 8px 32px rgba(245,158,11,0.4)",cursor:"pointer"}}>
-                मुफ़्त में शुरू करें ✦
+                मुफ़्त में शुरू करें
               </button>
               <button onClick={()=>setPage("/widget")} style={{background:"rgba(255,255,255,0.1)",color:"white",border:"1px solid rgba(255,255,255,0.25)",borderRadius:12,padding:"14px 32px",fontWeight:600,fontSize:16,cursor:"pointer",backdropFilter:"blur(8px)"}}>
-                Demo देखें →
+                Chat Widget खोलें
               </button>
             </div>
             <div style={{marginTop:48,display:"flex",gap:32,justifyContent:"center",flexWrap:"wrap"}}>
@@ -409,7 +411,7 @@ const Landing = ({ setPage }) => {
           </h2>
           <p className="hindi" style={{color:"rgba(255,255,255,0.6)",marginBottom:32,fontSize:16}}>Credit card की ज़रूरत नहीं। 5 मिनट में setup।</p>
           <button onClick={()=>setPage("/business")} style={{background:"linear-gradient(135deg,#F59E0B,#D97706)",color:"#1C0A00",borderRadius:12,padding:"16px 40px",fontWeight:800,fontSize:17,boxShadow:"0 8px 40px rgba(245,158,11,0.5)",cursor:"pointer"}}>
-            Free Trial शुरू करें ✦
+            Free Trial शुरू करें
           </button>
         </div>
       </section>
@@ -420,7 +422,8 @@ const Landing = ({ setPage }) => {
           <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:32,marginBottom:32}}>
             <div>
               <div className="display" style={{color:"white",fontWeight:800,fontSize:20,marginBottom:8}}>वाणी AI <span style={{color:"#F59E0B"}}>Pro</span></div>
-              <p style={{fontSize:13,lineHeight:1.7,maxWidth:220}}>TCC ka AI-powered compliance aur business support desk. Since 2019, Jaipur.</p>
+              <p style={{fontSize:13,lineHeight:1.7,maxWidth:260}}>TCC AI Voice Desk by The Consulting Crew. Compliance, taxation and digital growth for Indian MSMEs. Since 2019, Jaipur.</p>
+              <p style={{fontSize:12,lineHeight:1.7,maxWidth:260,marginTop:10,color:"rgba(255,255,255,0.4)"}}>Operated by Paise Ki Pathshala Pvt Ltd<br/>CIN U69200RJ2026PTC111856<br/>GSTIN 08ABJCP7313N1ZD</p>
             </div>
             {[["Product",["Features","Pricing","Integrations","Changelog"]],
               ["Company",["About","Blog","Careers","Contact"]],
@@ -431,9 +434,12 @@ const Landing = ({ setPage }) => {
               </div>
             ))}
           </div>
-          <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:20,display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
-            <span style={{fontSize:12}}>© 2026 वाणी AI Pro — Made with ❤️ in Jaipur, Rajasthan</span>
-            <span style={{fontSize:12}}>the_consultingcrew@outlook.com | +91-9251022710 | 0141-4489577</span>
+          <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:20,display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:8,alignItems:"center"}}>
+            <span style={{fontSize:12}}>© 2026 वाणी AI Pro — The Consulting Crew, Jaipur</span>
+            <span style={{fontSize:12}}>info@consultingcrew.in | +91 93521 15498 | 0141-4489577</span>
+          </div>
+          <div style={{textAlign:"center",marginTop:14,fontSize:11,color:"rgba(255,255,255,0.35)",letterSpacing:"0.05em"}}>
+            v1.0 Production — Apr 2026
           </div>
         </div>
       </footer>
@@ -445,12 +451,12 @@ const Landing = ({ setPage }) => {
 const AdminDashboard = () => {
   const [activeSidebar, setActiveSidebar] = useState("overview");
   const businesses = [
-    { name:"The Consulting Crew Trading", owner:"Rudra Pratap", plan:"Pro", msgs:12840, leads:342, status:"Active" },
-    { name:"Sharma Real Estate", owner:"Rajesh Sharma", plan:"Enterprise", msgs:28400, leads:891, status:"Active" },
+    { name:"The Consulting Crew", owner:"Team TCC", plan:"Enterprise", msgs:28400, leads:891, status:"Active" },
+    { name:"Paise Ki Pathshala", owner:"Education Team", plan:"Pro", msgs:12840, leads:342, status:"Active" },
+    { name:"Sharma Real Estate", owner:"Rajesh Sharma", plan:"Pro", msgs:9800, leads:278, status:"Active" },
     { name:"Rajputana Hotel", owner:"Vikram Singh Rathore", plan:"Basic", msgs:5200, leads:124, status:"Active" },
-    { name:"Dr. Gupta Clinic", owner:"Dr. Sunil Gupta", plan:"Pro", msgs:9800, leads:278, status:"Active" },
-    { name:"Jaipur Fabrics", owner:"Meena Devi", plan:"Free", msgs:480, leads:18, status:"Trial" },
-    { name:"Rajasthan Tours & Travels", owner:"Aman Meena", plan:"Basic", msgs:3600, leads:92, status:"Active" },
+    { name:"Jaipur Fabrics", owner:"Meena Devi", plan:"Basic", msgs:3600, leads:92, status:"Active" },
+    { name:"Rajasthan Tours & Travels", owner:"Aman Meena", plan:"Free", msgs:480, leads:18, status:"Trial" },
   ];
   const monthlyData = [
     {month:"Oct",val:52},
@@ -473,6 +479,7 @@ const AdminDashboard = () => {
     {id:"users",icon:"users",label:"Users"},
     {id:"revenue",icon:"rupee",label:"Revenue"},
     {id:"messages",icon:"msg",label:"Messages"},
+    {id:"control",icon:"globe",label:"Control Center"},
     {id:"settings",icon:"gear",label:"Settings"},
   ];
 
@@ -510,7 +517,7 @@ const AdminDashboard = () => {
             <p style={{color:"#6B7280",fontSize:13,marginTop:2}}>वाणी AI Pro — Platform Overview</p>
           </div>
           <div style={{display:"flex",gap:8}}>
-            <div style={{background:"white",border:"1px solid #EDE9FE",borderRadius:8,padding:"8px 14px",fontSize:13,color:"#374151"}}>📅 March 2026</div>
+            <div style={{background:"white",border:"1px solid #EDE9FE",borderRadius:8,padding:"8px 14px",fontSize:13,color:"#374151"}}>April 2026</div>
             <div style={{background:"linear-gradient(135deg,#7C3AED,#5B21B6)",color:"white",borderRadius:8,padding:"8px 14px",fontSize:13,fontWeight:600,cursor:"pointer"}}>+ New Business</div>
           </div>
         </div>
@@ -609,11 +616,32 @@ const AdminDashboard = () => {
             </table>
           </div>
         </div>
+
+        {/* Control Center quick-access tiles */}
+        <div style={{marginTop:28,background:"white",borderRadius:16,padding:24,border:"1px solid #EDE9FE"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16,flexWrap:"wrap",gap:8}}>
+            <h3 style={{fontWeight:800,color:"#0F0A1E",fontSize:15}}>Control Center — Live Surfaces</h3>
+            <span style={{fontSize:11,color:"#9CA3AF"}}>v1.0 Production — Apr 2026</span>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:14}}>
+            {[
+              { title:"TCC Digital Hub", url:"https://tcc-digital-hub.netlify.app/app-prototype/", color:"#7C3AED" },
+              { title:"Customer Chat", url:"https://vaani-ai-agent.netlify.app/", color:"#06B6D4" },
+              { title:"Consulting Crew", url:"https://consultingcrew.in", color:"#F59E0B" },
+              { title:"Paise Ki Pathshala", url:"https://rudraconsultantstax-design.github.io/paise-ki-pathshala/", color:"#22C55E" },
+              { title:"Pricing", url:"https://consultingcrew.in/pricing/", color:"#EF4444" },
+            ].map(t=>(
+              <a key={t.title} href={t.url} target="_blank" rel="noopener noreferrer" className="card-hover" style={{display:"block",padding:"14px 16px",borderRadius:12,background:"#FAFAFE",border:"1px solid #EDE9FE",textDecoration:"none",color:"inherit"}}>
+                <div style={{fontWeight:700,fontSize:13,color:"#0F0A1E",marginBottom:4}}>{t.title}</div>
+                <div style={{fontSize:11,color:t.color,fontWeight:600,wordBreak:"break-all"}}>{t.url} →</div>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-
 // ─── BUSINESS PORTAL ─────────────────────────────────────────────────────────
 const BusinessPortal = () => {
   const [activeSidebar, setActiveSidebar] = useState("dashboard");
@@ -662,8 +690,8 @@ const BusinessPortal = () => {
         {/* Header */}
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:24,flexWrap:"wrap",gap:12}}>
           <div>
-            <h1 style={{fontWeight:800,fontSize:21,color:"#0F0A1E"}}>Good Morning, Team TCC! 🙏</h1>
-            <p className="hindi" style={{color:"#6B7280",fontSize:13,marginTop:2}}>आज का summary — March 30, 2026</p>
+            <h1 style={{fontWeight:800,fontSize:21,color:"#0F0A1E"}}>Good Morning, Team TCC</h1>
+            <p className="hindi" style={{color:"#6B7280",fontSize:13,marginTop:2}}>आज का summary — April 17, 2026</p>
           </div>
           <div style={{display:"flex",gap:8}}>
             <div style={{background:"white",border:"1px solid #EDE9FE",borderRadius:8,padding:"8px 14px",fontSize:12,color:"#374151",display:"flex",alignItems:"center",gap:6}}>
@@ -789,33 +817,79 @@ const BusinessPortal = () => {
 // ─── CHAT WIDGET PAGE ─────────────────────────────────────────────────────────
 const ChatWidgetPage = () => {
   const [widgetOpen, setWidgetOpen] = useState(true);
+  const [language, setLanguage] = useState("Hinglish");
+  const [ttsOn, setTtsOn] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [messages, setMessages] = useState([
-    { from:"bot", text:"Namaste! 🙏 Main Vaani hoon, The Consulting Crew ka AI sahayak. Main aapki kaise madad kar sakti hoon?", time:"10:24 AM" },
+    { from:"bot", text:"Namaste. Main Vaani hoon, The Consulting Crew ki AI assistant. Aap kaisa help chahte hain — GST, ITR, compliance, ya digital marketing?", time:"" },
   ]);
   const [typing, setTyping] = useState(false);
   const [input, setInput] = useState("");
   const chatRef = useRef(null);
 
-  const quickReplies = ["Services देखें 📊","Consult करें 🛒","Location 📍","Call करें 📞"];
+  const sanitize = (t) => (window.VaaniSanitizer ? window.VaaniSanitizer.sanitize(t) : String(t||""));
 
-  const botResponses = {
-    "Services देखें 📊": "TCC ki compliance services:\n• GST Filing: ₹2,499/year se\n• ITR Filing: ₹999 se\n• TDS Returns: ₹1,499/quarter\n• Company Registration: ₹5,999\n\nKaunsi service chahiye aapko?",
-    "Consult करें 🛒": "Free consultation book karne ke liye yeh details dijiye:\n• Business type\n• Service chahiye (GST/ITR/TDS/Registration)\n• Aapka naam & phone\n\nHum 2 hours mein call back karenge! 🚛",
-    "Location 📍": "📍 The Consulting Crew\nG-02, C-71, Swastik Heights, Gandhi Path West, Vaishali Nagar, Jaipur - 302021\n\nSomwar - Shanivaar: 10 AM - 7 PM\nGoogle Maps pe 'The Consulting Crew Jaipur' search karein.",
-    "Call करें 📞": "📞 Direct call karein:\n+91-9251022710 (Team TCC)\n\nYa aap apna number dijiye, hum aapko call back karenge within 15 minutes! 😊",
+  const nowTime = () => new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+
+  const speak = (text) => {
+    if (!ttsOn) return;
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    const clean = sanitize(text);
+    if (!clean) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(clean);
+      const langMap = { Hindi:"hi-IN", English:"en-IN", Hinglish:"hi-IN", Rajasthani:"hi-IN" };
+      u.lang = langMap[language] || "hi-IN";
+      u.rate = 1;
+      u.pitch = 1;
+      window.speechSynthesis.speak(u);
+    } catch(e) { /* noop */ }
   };
 
-  const sendMessage = (text) => {
-    if (!text.trim()) return;
-    const newMsgs = [...messages, { from:"user", text, time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) }];
-    setMessages(newMsgs);
+  const quickReplies = [
+    "GSTR-3B due date?",
+    "Pricing plans",
+    "Digital marketing",
+    "Book consultation",
+  ];
+
+  const fallbackReplies = {
+    "GSTR-3B due date?": "GSTR-3B ki due date monthly filers ke liye agle month ki 20 tarikh hai. QRMP filers 22 ya 24 tarikh par file karte hain, state group ke hisaab se.",
+    "Pricing plans": "TCC ke paanch plans hain: Foundation Lite Rs 29,999 per year, Foundation Shield Rs 54,999, Compliance Control Rs 1,14,999, Financial Armour Rs 2,19,999, Governance Suite Rs 2,99,999. Kaunsa scope suit karta hai aapko?",
+    "Digital marketing": "Hum Google Business Profile, Google Ads, Social Media, SEO, website development aur launch campaigns handle karte hain. Pricing project-wise customised hoti hai. Aap kaunsa goal target kar rahe hain?",
+    "Book consultation": "Consultation ke liye aapka naam, phone number, business name aur city batayein. Hum WhatsApp par +91 93521 15498 se confirm kar denge.",
+  };
+
+  const sendMessage = async (text) => {
+    const raw = (text || "").toString().trim();
+    if (!raw) return;
+    const userMsg = { from:"user", text: raw, time: nowTime() };
+    const history = [...messages, userMsg];
+    setMessages(history);
     setInput("");
     setTyping(true);
-    setTimeout(() => {
-      setTyping(false);
-      const reply = botResponses[text] || "Haan ji, main samajh gayi! Iske baare mein ek second mein batati hoon. Koi aur sawaal ho toh zaroor poochhen. 😊";
-      setMessages(prev => [...prev, { from:"bot", text:reply, time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) }]);
-    }, 1500);
+
+    let replyText = "";
+    try {
+      const apiMessages = history.map(m => ({ role: m.from === "user" ? "user" : "assistant", content: m.text }));
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: apiMessages, language, message: raw })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        replyText = data.text || data.content?.[0]?.text || "";
+      }
+    } catch(e) { replyText = ""; }
+
+    if (!replyText) replyText = fallbackReplies[raw] || "Main aapki query samajh gayi. Humari team aapko WhatsApp +91 93521 15498 par detail mein guide kar degi. Kya aap apna naam aur business name share karein?";
+
+    const clean = sanitize(replyText);
+    setTyping(false);
+    setMessages(prev => [...prev, { from:"bot", text: clean, time: nowTime() }]);
+    speak(clean);
   };
 
   useEffect(() => {
@@ -826,11 +900,30 @@ const ChatWidgetPage = () => {
     <div style={{minHeight:"calc(100vh - 64px)",background:"linear-gradient(135deg,#F8F5FF,#EDE9FE)",padding:"32px 16px"}}>
       <div style={{maxWidth:800,margin:"0 auto"}}>
         <div style={{textAlign:"center",marginBottom:40}}>
-          <div style={{fontSize:13,color:"#7C3AED",fontWeight:700,letterSpacing:"0.1em",marginBottom:8}}>LIVE DEMO</div>
+          <div style={{fontSize:13,color:"#7C3AED",fontWeight:700,letterSpacing:"0.1em",marginBottom:8}}>LIVE CHAT WIDGET</div>
           <h1 className="display" style={{fontSize:"clamp(1.8rem,4vw,2.5rem)",fontWeight:900,color:"#0F0A1E",marginBottom:12}}>
             वाणी Chat Widget
           </h1>
-          <p className="hindi" style={{color:"#6B7280",fontSize:15}}>The Consulting Crew ka embedded AI assistant — बिल्कुल real जैसा</p>
+          <p className="hindi" style={{color:"#6B7280",fontSize:15}}>The Consulting Crew ka embedded AI assistant</p>
+
+          {/* Controls */}
+          <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:12,flexWrap:"wrap",marginTop:18}}>
+            <label style={{fontSize:12,color:"#6B7280",fontWeight:600}}>Language</label>
+            <select value={language} onChange={e=>setLanguage(e.target.value)} style={{border:"1.5px solid #EDE9FE",borderRadius:8,padding:"6px 12px",fontSize:13,background:"white",color:"#0F0A1E",fontWeight:600}}>
+              <option value="Hinglish">Hinglish</option>
+              <option value="Hindi">Hindi</option>
+              <option value="English">English</option>
+              {showAdvanced && <option value="Rajasthani">Rajasthani (Advanced)</option>}
+            </select>
+            <label style={{fontSize:12,color:"#6B7280",fontWeight:600,display:"flex",alignItems:"center",gap:6,cursor:"pointer"}}>
+              <input type="checkbox" checked={ttsOn} onChange={e=>setTtsOn(e.target.checked)}/>
+              Voice (TTS)
+            </label>
+            <label style={{fontSize:12,color:"#6B7280",fontWeight:600,display:"flex",alignItems:"center",gap:6,cursor:"pointer"}}>
+              <input type="checkbox" checked={showAdvanced} onChange={e=>setShowAdvanced(e.target.checked)}/>
+              Advanced
+            </label>
+          </div>
         </div>
 
         {/* Website mockup */}
@@ -841,7 +934,7 @@ const ChatWidgetPage = () => {
               {["#EF4444","#F59E0B","#22C55E"].map(c=><div key={c} style={{width:10,height:10,borderRadius:"50%",background:c}}/>)}
             </div>
             <div style={{flex:1,background:"white",borderRadius:6,padding:"4px 12px",fontSize:11,color:"#9CA3AF",border:"1px solid #E5E7EB"}}>
-              🔒 www.consultingcrew.in
+              www.consultingcrew.in
             </div>
           </div>
 
@@ -855,17 +948,16 @@ const ChatWidgetPage = () => {
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:20}}>
               {["GST Filing","ITR Filing","MSME Registration"].map(item=>(
                 <div key={item} style={{background:"#F8F5FF",border:"1px solid #EDE9FE",borderRadius:10,padding:"12px 14px"}}>
-                  <div style={{width:40,height:40,borderRadius:8,background:"linear-gradient(135deg,#EDE9FE,#DDD6FE)",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>💼</div>
+                  <div style={{width:40,height:40,borderRadius:8,background:"linear-gradient(135deg,#EDE9FE,#DDD6FE)",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,color:"#7C3AED",fontWeight:700}}>TCC</div>
                   <div style={{fontWeight:700,fontSize:12,color:"#0F0A1E",marginBottom:2}}>{item}</div>
                   <div style={{fontSize:11,color:"#9CA3AF"}}>Expert services</div>
                 </div>
               ))}
             </div>
             <div style={{background:"linear-gradient(135deg,#0F0A1E,#3B1A72)",borderRadius:12,padding:16,color:"white",marginBottom:16}}>
-              <div style={{fontWeight:700,marginBottom:4,fontSize:14}}>🏆 Jaipur ka Trusted Compliance Partner</div>
+              <div style={{fontWeight:700,marginBottom:4,fontSize:14}}>Jaipur ka Trusted Compliance Partner</div>
               <div style={{fontSize:12,color:"rgba(255,255,255,0.6)"}}>1,100+ Clients | CA/CS/CMA Certified | Pan-India Network</div>
             </div>
-            <div style={{color:"#6B7280",fontSize:11,textAlign:"center",marginTop:8}}>↑ यह The Consulting Crew की website का simulation है — Vaani widget नीचे right corner में है ↓</div>
 
             {/* Widget */}
             {widgetOpen && (
@@ -873,17 +965,21 @@ const ChatWidgetPage = () => {
                 {/* Widget Header */}
                 <div className="widget-header">
                   <div className="widget-avatar" style={{position:"relative"}}>
-                    <span style={{fontSize:20}}>🤖</span>
+                    <span style={{fontSize:14,fontWeight:700,color:"white"}}>वा</span>
                     <div className="online-dot" style={{position:"absolute",bottom:1,right:1}}/>
                   </div>
                   <div style={{flex:1}}>
                     <div style={{fontWeight:700,fontSize:14}}>Vaani — The Consulting Crew</div>
                     <div style={{fontSize:11,opacity:0.7,display:"flex",alignItems:"center",gap:4}}>
                       <div style={{width:6,height:6,borderRadius:"50%",background:"#22C55E"}}/>
-                      Online • Abhi jawab denge
+                      Online
                     </div>
                   </div>
-                  <div style={{display:"flex",gap:4}}><button onClick={()=>window.open("tel:+919251022710")} style={{background:"rgba(255,255,255,0.15)",border:"none",color:"white",width:28,height:28,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13}}><Icon name="phone" size={14}/></button><button onClick={()=>window.open("https://wa.me/919251022710")} style={{background:"rgba(37,211,102,0.25)",border:"none",color:"white",width:28,height:28,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13}}><Icon name="msg" size={14}/></button><button onClick={()=>setWidgetOpen(false)} style={{background:"rgba(255,255,255,0.15)",border:"none",color:"white",width:28,height:28,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>✕</button></div>
+                  <div style={{display:"flex",gap:4}}>
+                    <button onClick={()=>window.open("tel:+919352115498")} style={{background:"rgba(255,255,255,0.15)",border:"none",color:"white",width:28,height:28,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13}} title="Call"><Icon name="phone" size={14}/></button>
+                    <button onClick={()=>window.open("https://wa.me/919352115498")} style={{background:"rgba(37,211,102,0.25)",border:"none",color:"white",width:28,height:28,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13}} title="WhatsApp"><Icon name="msg" size={14}/></button>
+                    <button onClick={()=>setWidgetOpen(false)} style={{background:"rgba(255,255,255,0.15)",border:"none",color:"white",width:28,height:28,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}} title="Close"><Icon name="close" size={12}/></button>
+                  </div>
                 </div>
 
                 {/* Chat body */}
@@ -891,9 +987,9 @@ const ChatWidgetPage = () => {
                   {messages.map((m,i)=>(
                     <div key={i} style={{display:"flex",flexDirection:"column",alignItems:m.from==="user"?"flex-end":"flex-start",gap:3}}>
                       <div className={m.from==="bot"?"chat-bubble-bot":"chat-bubble-user"} style={{whiteSpace:"pre-line"}}>
-                        {m.text}
+                        {m.from==="bot" ? sanitize(m.text) : m.text}
                       </div>
-                      <span style={{fontSize:9,color:"#9CA3AF",padding:"0 4px"}}>{m.time}</span>
+                      {m.time && <span style={{fontSize:9,color:"#9CA3AF",padding:"0 4px"}}>{m.time}</span>}
                     </div>
                   ))}
                   {typing && (
@@ -922,7 +1018,7 @@ const ChatWidgetPage = () => {
                     value={input}
                     onChange={e=>setInput(e.target.value)}
                     onKeyDown={e=>e.key==="Enter"&&sendMessage(input)}
-                    placeholder="कुछ भी पूछें..."
+                    placeholder="Kuch bhi poochhein..."
                     className="hindi"
                     style={{flex:1,border:"1.5px solid #EDE9FE",borderRadius:10,padding:"8px 12px",fontSize:13,outline:"none",fontFamily:"inherit"}}
                   />
@@ -935,26 +1031,76 @@ const ChatWidgetPage = () => {
 
             {/* Float button */}
             <div className="float-btn" onClick={()=>setWidgetOpen(!widgetOpen)}>
-              {widgetOpen ? <span style={{color:"white",fontSize:18}}>✕</span> : <span style={{fontSize:22}}>💬</span>}
+              {widgetOpen ? <span style={{color:"white",fontSize:18}}>×</span> : <span style={{fontSize:22,color:"white",fontWeight:700}}>वा</span>}
             </div>
           </div>
         </div>
 
         {/* Instructions */}
         <div style={{marginTop:28,background:"white",borderRadius:16,padding:24,border:"1px solid #EDE9FE"}}>
-          <h3 style={{fontWeight:700,color:"#0F0A1E",marginBottom:12,fontSize:15}}>🧪 Widget demo कैसे use करें</h3>
+          <h3 style={{fontWeight:700,color:"#0F0A1E",marginBottom:12,fontSize:15}}>Widget kaise use karein</h3>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:16}}>
             {[
-              "Quick reply buttons click करें",
-              "Hindi/English में type करें",
-              "Enter press करके send करें",
-              "Bottom right button से close/open करें"
+              "Quick reply buttons click karein",
+              "Hindi, Hinglish, ya English mein type karein",
+              "Enter press karke send karein",
+              "Voice (TTS) enable karke sun sakte hain"
             ].map((tip,i)=>(
               <div key={i} style={{display:"flex",gap:8,alignItems:"flex-start"}}>
                 <div style={{width:22,height:22,borderRadius:"50%",background:"#EDE9FE",color:"#7C3AED",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0}}>{i+1}</div>
                 <span style={{fontSize:13,color:"#374151"}}>{tip}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ─── CONTROL CENTER ───────────────────────────────────────────────────────────
+const ControlCenter = () => {
+  const tiles = [
+    { id:"digital-hub", title:"TCC Digital Hub", desc:"Client portal — compliance calendar, document vault, notices, reports.", url:"https://tcc-digital-hub.netlify.app/app-prototype/", color:"#7C3AED", accent:"#EDE9FE" },
+    { id:"customer-chat", title:"Customer Chat", desc:"Live Vaani chat agent used by end customers.", url:"https://vaani-ai-agent.netlify.app/", color:"#06B6D4", accent:"#CFFAFE" },
+    { id:"consulting-crew", title:"Consulting Crew", desc:"Main TCC website — services, plans, team.", url:"https://consultingcrew.in", color:"#F59E0B", accent:"#FEF3C7" },
+    { id:"paise-ki-pathshala", title:"Paise Ki Pathshala", desc:"Financial literacy sister brand (EDUCATE — INVEST — GROW).", url:"https://rudraconsultantstax-design.github.io/paise-ki-pathshala/", color:"#22C55E", accent:"#DCFCE7" },
+    { id:"pricing", title:"Pricing", desc:"Live launch plans and pricing page.", url:"https://consultingcrew.in/pricing/", color:"#EF4444", accent:"#FEE2E2" },
+  ];
+  return (
+    <div style={{minHeight:"calc(100vh - 64px)",background:"linear-gradient(135deg,#F8F5FF,#EDE9FE)",padding:"48px 16px"}}>
+      <div style={{maxWidth:1100,margin:"0 auto"}}>
+        <div style={{textAlign:"center",marginBottom:40}}>
+          <div style={{fontSize:13,color:"#7C3AED",fontWeight:700,letterSpacing:"0.1em",marginBottom:8}}>CONTROL CENTER</div>
+          <h1 className="display" style={{fontSize:"clamp(1.8rem,4vw,2.6rem)",fontWeight:900,color:"#0F0A1E",marginBottom:10}}>
+            The Consulting Crew — Operations Hub
+          </h1>
+          <p style={{color:"#6B7280",fontSize:15,maxWidth:640,margin:"0 auto"}}>
+            Central launchpad for all TCC surfaces. Every tile opens the live production destination in a new tab.
+          </p>
+        </div>
+
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",gap:20}}>
+          {tiles.map(t=>(
+            <a key={t.id} href={t.url} target="_blank" rel="noopener noreferrer" className="card-hover" style={{background:"white",borderRadius:18,padding:24,border:"1px solid #EDE9FE",textDecoration:"none",color:"inherit",display:"block"}}>
+              <div style={{width:48,height:48,borderRadius:12,background:t.accent,display:"flex",alignItems:"center",justifyContent:"center",color:t.color,fontWeight:800,fontSize:18,marginBottom:14}}>{t.title.split(" ").map(w=>w[0]).join("").slice(0,2)}</div>
+              <div style={{fontWeight:800,fontSize:16,color:"#0F0A1E",marginBottom:6}}>{t.title}</div>
+              <div style={{fontSize:13,color:"#6B7280",lineHeight:1.55,marginBottom:14}}>{t.desc}</div>
+              <div style={{fontSize:12,color:t.color,fontWeight:700,wordBreak:"break-all"}}>{t.url} →</div>
+            </a>
+          ))}
+        </div>
+
+        <div style={{marginTop:40,background:"white",borderRadius:16,padding:24,border:"1px solid #EDE9FE"}}>
+          <h3 style={{fontWeight:800,color:"#0F0A1E",marginBottom:12,fontSize:15}}>Business identity</h3>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:14,fontSize:13,color:"#374151"}}>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>LEGAL NAME</div>Paise Ki Pathshala Pvt Ltd</div>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>CIN</div>U69200RJ2026PTC111856</div>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>PAN</div>ABJCP7313N</div>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>GSTIN</div>08ABJCP7313N1ZD</div>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>OFFICE</div>C-71, Hastinapur, Vaishali Nagar, Jaipur 302021</div>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>EMAIL</div>info@consultingcrew.in</div>
+            <div><div style={{color:"#9CA3AF",fontSize:11,fontWeight:700,letterSpacing:"0.05em",marginBottom:2}}>PHONE</div>+91 93521 15498</div>
           </div>
         </div>
       </div>
@@ -989,6 +1135,7 @@ const App = () => {
       {page==="/admin" && <AdminDashboard/>}
       {page==="/business" && <BusinessPortal/>}
       {page==="/widget" && <ChatWidgetPage/>}
+      {page==="/control-center" && <ControlCenter/>}
     </div>
   );
 };
