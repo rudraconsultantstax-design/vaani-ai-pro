@@ -433,6 +433,16 @@ const Landing = ({ setPage }) => {
                 {links.map(l=><div key={l} style={{fontSize:13,marginBottom:8,cursor:"pointer"}} className="hover:text-white transition-colors">{l}</div>)}
               </div>
             ))}
+            <div>
+              <div style={{color:"white",fontWeight:700,marginBottom:12,fontSize:13}}>Also from TCC</div>
+              {[
+                {label:"The Consulting Crew", url:"https://consultingcrew.in"},
+                {label:"TCC Digital Hub", url:"https://tcc-digital-hub.netlify.app"},
+                {label:"Paise Ki Pathshala", url:"https://paise-ki-pathshala.netlify.app"},
+              ].map(l=>(
+                <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer" style={{fontSize:13,marginBottom:8,display:"block",color:"inherit",textDecoration:"none"}} className="hover:text-white transition-colors">{l.label}</a>
+              ))}
+            </div>
           </div>
           <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:20,display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:8,alignItems:"center"}}>
             <span style={{fontSize:12}}>© 2026 वाणी AI Pro — The Consulting Crew, Jaipur</span>
